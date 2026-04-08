@@ -1,0 +1,109 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ink: #1a1a1a;
+    --paper: #f5f2ec;
+    --accent: #8b6f47;
+  }
+
+  .dark {
+    --ink: #e8e3d8;
+    --paper: #141210;
+    --accent: #b8956a;
+  }
+}
+
+@layer components {
+  /* Chinese prose reading styles */
+  .prose-chinese {
+    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', Georgia, serif;
+    font-size: 1.0625rem;
+    line-height: 2.0;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+  }
+
+  .prose-chinese p {
+    margin-bottom: 1.25em;
+    text-indent: 2em;
+    hyphens: none;
+  }
+
+  .prose-chinese p:first-child {
+    text-indent: 0;
+  }
+
+  /* Chapter title heading */
+  .chapter-title {
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+  }
+
+  /* Nav link */
+  .nav-link {
+    @apply text-accent dark:text-amber-400 hover:text-accent-dark dark:hover:text-amber-300 transition-colors duration-200;
+  }
+
+  /* Divider ornament */
+  .ornament {
+    @apply text-center text-accent dark:text-amber-500 my-8 text-lg tracking-widest;
+  }
+}
+
+@layer utilities {
+  .bg-paper {
+    background-color: #f5f2ec;
+  }
+  .dark .bg-paper {
+    background-color: #141210;
+  }
+  .text-ink {
+    color: #1a1a1a;
+  }
+  .dark .text-ink {
+    color: #e8e3d8;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4a882;
+  border-radius: 3px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #5a4a38;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(139, 111, 71, 0.25);
+}
+.dark ::selection {
+  background: rgba(184, 149, 106, 0.3);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Image captions */
+figure figcaption {
+  font-family: 'Noto Sans SC', sans-serif;
+  font-size: 0.8125rem;
+  color: #888;
+  text-align: center;
+  margin-top: 0.5rem;
+  letter-spacing: 0.03em;
+}
