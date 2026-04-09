@@ -37,11 +37,11 @@ export default function HomePage() {
             <div className="flex-shrink-0 mx-auto sm:mx-0">
               <div className="relative w-52 sm:w-56 shadow-lg rounded overflow-hidden">
                 <Image
-                  src="/images/cover.png"
+                  src="/images/cover.jpg"
                   alt="《我有所爱，且为所爱》封面"
                   width={224}
-                  height={320}
-                  className="w-full h-auto object-cover"
+                  height={316}
+                  className="w-full h-auto"
                   priority
                 />
               </div>
