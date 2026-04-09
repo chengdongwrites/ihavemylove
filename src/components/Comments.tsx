@@ -1,6 +1,8 @@
 'use client'
 import { useEffect, useState } from 'react'
 
+const PAGE_SIZE = 10
+
 interface Comment {
   id: number
   name: string
@@ -9,17 +11,40 @@ interface Comment {
 }
 
 export default function Comments({ page }: { page: string }) {
-  const [comments, setComments] = useState<Comment[]>([])
-  const [name, setName]   = useState('')
-  const [email, setEmail] = useState('')
-  const [body, setBody]   = useState('')
-  const [status, setStatus] = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
-  const [errMsg, setErrMsg] = useState('')
+  const [comments, setComments]   = useState<Comment[]>([])
+  const [visible, setVisible]     = useState(PAGE_SIZE)
+  const [name, setName]           = useState('')
+  const [email, setEmail]         = useState('')
+  const [body, setBody]           = useState('')
+  const [status, setStatus]       = useState<'idle' | 'sending' | 'done' | 'error'>('idle')
+  const [errMsg, setErrMsg]       = useState('')
+
+  // Load saved name/email from localStorage on first render
+  useEffect(() => {
+    const saved = localStorage.getItem('commenter')
+    if (saved) {
+      const { name: n, email: e } = JSON.parse(saved)
+      if (n) setName(n)
+      if (e) setEmail(e)
+    }
+  }, [])
+
+  // Save name/email whenever they change
+  useEffect(() => {
+    if (name || email) {
+      localStorage.setItem('commenter', JSON.stringify({ name, email }))
+    }
+  }, [name, email])
 
   function load() {
     fetch(`/api/comments?page=${encodeURIComponent(page)}`)
       .then(r => r.json())
-      .then(d => Array.isArray(d) && setComments(d))
+      .then(d => {
+        if (Array.isArray(d)) {
+          setComments(d)
+          setVisible(PAGE_SIZE) // reset to first page when reloading
+        }
+      })
   }
 
   useEffect(() => { load() }, [page])
@@ -39,21 +64,30 @@ export default function Comments({ page }: { page: string }) {
       setErrMsg(data.error ?? '提交失败，请稍后再试')
     } else {
       setStatus('done')
-      setName(''); setEmail(''); setBody('')
+      setBody('')
       load()
     }
   }
 
+  const shown    = comments.slice(0, visible)
+  const hasMore  = visible < comments.length
+  const remaining = comments.length - visible
+
   return (
     <section className="mt-16 border-t border-amber-200/40 dark:border-gray-800/60 pt-10">
-      <h2 className="font-serif text-lg text-ink dark:text-gray-200 tracking-widest mb-6">
+      <h2 className="font-serif text-lg text-ink dark:text-gray-200 tracking-widest mb-1">
         留言
       </h2>
+      {comments.length > 0 && (
+        <p className="font-sans text-xs text-gray-400 dark:text-gray-600 mb-6">
+          共 {comments.length} 条
+        </p>
+      )}
 
       {/* Existing comments */}
       {comments.length > 0 && (
         <div className="space-y-6 mb-10">
-          {comments.map(c => (
+          {shown.map(c => (
             <div key={c.id} className="border-l-2 border-amber-200/50 dark:border-amber-900/40 pl-4">
               <div className="flex items-baseline gap-3 mb-1">
                 <span className="font-serif text-sm text-ink dark:text-gray-300">{c.name}</span>
@@ -68,6 +102,15 @@ export default function Comments({ page }: { page: string }) {
               </p>
             </div>
           ))}
+
+          {hasMore && (
+            <button
+              onClick={() => setVisible(v => v + PAGE_SIZE)}
+              className="font-sans text-sm text-accent dark:text-amber-400 hover:underline"
+            >
+              加载更多（还有 {remaining} 条）
+            </button>
+          )}
         </div>
       )}
 
