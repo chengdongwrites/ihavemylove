@@ -26,9 +26,7 @@ export const chapters: Chapter[] = [
 
 愿你读完这部小说，也找到属于自己的那句话。
 
-云中子（Klaude）
-
-目　录`,
+云中子（Klaude）`,
   },
   {
     num: "01",
