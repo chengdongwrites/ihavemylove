@@ -104,8 +104,30 @@ export default function NovelPage() {
           ))}
         </div>
 
+        {/* 跋 */}
+        <div className="w-full h-px bg-amber-200/40 dark:bg-gray-800/60 mt-4 mb-4" />
+        <Link
+          href="/ba"
+          className="group flex items-start gap-4 py-4 px-4 rounded-lg hover:bg-amber-50 dark:hover:bg-gray-900 transition-colors border border-transparent hover:border-amber-200/50 dark:hover:border-gray-700/50"
+        >
+          <div className="flex-shrink-0 w-8 text-center pt-0.5">
+            <span className="font-serif text-accent dark:text-amber-500 text-sm">跋</span>
+          </div>
+          <div className="flex-1 min-w-0">
+            <div className="font-serif text-base text-ink dark:text-gray-200 group-hover:text-accent dark:group-hover:text-amber-400 transition-colors">
+              跋
+            </div>
+            <div className="font-sans text-sm text-gray-400 dark:text-gray-500 mt-1">
+              郭东日
+            </div>
+          </div>
+          <div className="flex-shrink-0 text-gray-300 dark:text-gray-700 group-hover:text-accent dark:group-hover:text-amber-600 transition-colors pt-0.5">
+            →
+          </div>
+        </Link>
+
         {/* Bottom note */}
-        <div className="mt-12 text-center">
+        <div className="mt-8 text-center">
           <p className="font-sans text-xs text-gray-400 dark:text-gray-600 tracking-wide">
             全文共十三章，跨越三十八年
           </p>
