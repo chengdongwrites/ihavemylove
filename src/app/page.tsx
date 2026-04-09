@@ -2,6 +2,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ViewCounter from '@/components/ViewCounter'
+import Comments from '@/components/Comments'
 import { chapters } from '@/data/chapters'
 
 export default function HomePage() {
@@ -143,6 +145,14 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+        </section>
+
+        {/* Homepage view counter + comments */}
+        <section className="max-w-2xl mx-auto px-4 sm:px-6 pb-12">
+          <div className="text-center mb-2">
+            <ViewCounter page="home" />
+          </div>
+          <Comments page="home" />
         </section>
       </main>
 

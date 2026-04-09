@@ -1,5 +1,7 @@
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ViewCounter from '@/components/ViewCounter'
+import Comments from '@/components/Comments'
 import Link from 'next/link'
 
 export const metadata = {
@@ -55,6 +57,12 @@ export default function VoicesPage() {
         </div>
 
         <div className="ornament mt-4">· · ·</div>
+
+        <div className="text-center mt-4 mb-2">
+          <ViewCounter page="voices" />
+        </div>
+
+        <Comments page="voices" />
 
         {/* Bottom nav */}
         <nav className="flex items-center justify-between py-4 border-t border-amber-200/40 dark:border-gray-800/60 mt-4">

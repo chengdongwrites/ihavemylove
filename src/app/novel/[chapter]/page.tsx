@@ -3,6 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ViewCounter from '@/components/ViewCounter'
+import Comments from '@/components/Comments'
 import { chapters, getChapterBySlug, getChapterIndex } from '@/data/chapters'
 
 export async function generateStaticParams() {
@@ -197,20 +199,18 @@ export default function ChapterPage({ params }: { params: { chapter: string } })
 
         <div className="ornament mt-12">· · ·</div>
 
+        {/* View counter */}
+        <div className="text-center mt-4 mb-2">
+          <ViewCounter page={ch.slug} />
+        </div>
+
         {/* Bottom nav */}
         <div className="mt-4">
           <ChapterNav />
         </div>
 
-        {/* Comment placeholder */}
-        <div className="mt-12 pt-8 border-t border-amber-200/40 dark:border-gray-800/60">
-          <h3 className="font-serif text-base text-gray-400 dark:text-gray-600 tracking-wider mb-4">留言</h3>
-          <div className="bg-amber-50/40 dark:bg-gray-900/40 rounded-lg p-6 text-center">
-            <p className="font-sans text-sm text-gray-400 dark:text-gray-600">
-              留言功能即将开放，欢迎回来交流。
-            </p>
-          </div>
-        </div>
+        {/* Comments */}
+        <Comments page={ch.slug} />
       </main>
 
       <SiteFooter />

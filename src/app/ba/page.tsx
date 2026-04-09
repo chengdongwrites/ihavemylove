@@ -1,5 +1,7 @@
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ViewCounter from '@/components/ViewCounter'
+import Comments from '@/components/Comments'
 import Link from 'next/link'
 
 export const metadata = {
@@ -66,8 +68,14 @@ export default function BaPage() {
 
         <div className="ornament mt-10">· · ·</div>
 
+        <div className="text-center mt-4 mb-2">
+          <ViewCounter page="ba" />
+        </div>
+
+        <Comments page="ba" />
+
         {/* Bottom nav */}
-        <nav className="flex items-center justify-between py-4 border-t border-amber-200/40 dark:border-gray-800/60">
+        <nav className="flex items-center justify-between py-4 border-t border-amber-200/40 dark:border-gray-800/60 mt-4">
           <Link href="/novel/dongzhi-xia" className="font-sans text-sm nav-link flex items-center gap-2">
             <span>←</span>
             <span className="hidden sm:inline">冬之沉静（下）</span>
