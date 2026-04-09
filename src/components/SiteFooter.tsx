@@ -6,7 +6,7 @@ export default function SiteFooter() {
           我有所爱，且为所爱
         </p>
         <p className="font-sans text-xs text-gray-400 dark:text-gray-600 tracking-wide">
-          城东（洛城东）著 · ihavemylove.life
+          洛城东著 · ihavemylove.life
         </p>
       </div>
     </footer>

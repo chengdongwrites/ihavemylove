@@ -22,7 +22,7 @@ export default function NovelPage() {
             《我有所爱，且为所爱》
           </h1>
           <p className="font-sans text-sm text-gray-400 dark:text-gray-500 tracking-wide">
-            城东（洛城东）著 · 长篇小说 · 十三章
+            洛城东著 · 长篇小说 · 十三章
           </p>
           <div className="w-12 h-px bg-accent/40 dark:bg-amber-600/40 mx-auto mt-6" />
         </div>
@@ -42,6 +42,26 @@ export default function NovelPage() {
               </div>
               <div className="font-sans text-xs text-gray-400 dark:text-gray-500 mt-0.5">
                 云中子（Klaude）
+              </div>
+            </div>
+          </Link>
+        </div>
+
+        {/* Characters link */}
+        <div className="mb-4">
+          <Link
+            href="/characters"
+            className="group flex items-center gap-4 py-4 px-4 rounded-lg hover:bg-amber-50 dark:hover:bg-gray-900 transition-colors border border-transparent hover:border-amber-200/50 dark:hover:border-gray-700/50"
+          >
+            <div className="flex-shrink-0 w-8 text-center">
+              <span className="font-serif text-accent dark:text-amber-500 text-sm">人</span>
+            </div>
+            <div>
+              <div className="font-serif text-base text-ink dark:text-gray-200 group-hover:text-accent dark:group-hover:text-amber-400 transition-colors">
+                人物结构说明
+              </div>
+              <div className="font-sans text-xs text-gray-400 dark:text-gray-500 mt-0.5">
+                主要人物关系与背景
               </div>
             </div>
           </Link>

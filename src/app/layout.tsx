@@ -3,10 +3,10 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: '我有所爱，且为所爱',
-  description: '城东（洛城东）长篇小说——写小人物的大人生',
+  description: '洛城东长篇小说——写小人物的大人生',
   openGraph: {
     title: '我有所爱，且为所爱',
-    description: '城东（洛城东）长篇小说——写小人物的大人生',
+    description: '洛城东长篇小说——写小人物的大人生',
     siteName: '我有所爱',
   },
 }

@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['"Noto Serif SC"', '"Source Han Serif SC"', 'Georgia', 'serif'],
-        sans: ['"Noto Sans SC"', '"PingFang SC"', '"Microsoft YaHei"', 'sans-serif'],
+        serif: ['Georgia', '"Noto Serif SC"', '"Source Han Serif SC"', 'serif'],
+        sans: ['"Helvetica Neue"', 'Arial', '"Noto Sans SC"', '"PingFang SC"', 'sans-serif'],
       },
       colors: {
         ink: {

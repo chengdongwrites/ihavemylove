@@ -19,7 +19,7 @@ export default function HomePage() {
               我有所爱，且为所爱
             </h1>
             <p className="font-sans text-accent dark:text-amber-400 text-sm tracking-widest mb-8">
-              城东（洛城东）著
+              洛城东著
             </p>
             <div className="w-16 h-px bg-accent/40 dark:bg-amber-600/40 mx-auto mb-8" />
             <p className="prose-chinese text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed text-center" style={{textIndent: 0}}>
@@ -107,7 +107,7 @@ export default function HomePage() {
             <div className="bg-amber-50/60 dark:bg-gray-900/60 rounded-lg p-6 sm:p-8">
               <h2 className="chapter-title text-lg text-ink dark:text-gray-100 tracking-wider mb-4">关于作者</h2>
               <p className="prose-chinese text-sm sm:text-base text-gray-700 dark:text-gray-300">
-                笔名城东（洛城东）。理工人，居美多年，写他所熟悉的一群留学生，写小人物在现实世界里如何栖居，如何在任何地方扎根，活出自己的答案。
+                笔名洛城东。理工人，居美多年，写他所熟悉的一群留学生，写小人物在现实世界里如何栖居，如何在任何地方扎根，活出自己的答案。
               </p>
               <div className="mt-4">
                 <Link

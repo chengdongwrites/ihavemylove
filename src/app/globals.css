@@ -19,7 +19,7 @@
 @layer components {
   /* Chinese prose reading styles */
   .prose-chinese {
-    font-family: 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', Georgia, serif;
+    font-family: Georgia, 'Noto Serif SC', 'Source Han Serif SC', 'STSong', 'SimSun', serif;
     font-size: 1.0625rem;
     line-height: 2.0;
     letter-spacing: 0.02em;

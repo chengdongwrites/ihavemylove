@@ -17,6 +17,9 @@ export async function generateMetadata({ params }: { params: { chapter: string }
   }
 }
 
+// Section number pattern: single Chinese number followed by 、or ．or just a number like 一 二 三
+const SECTION_NUM_RE = /^[一二三四五六七八九十百]+[、．。\s]*$/
+
 function renderContent(text: string) {
   const lines = text.split('\n')
   const elements: React.ReactNode[] = []
@@ -29,16 +32,6 @@ function renderContent(text: string) {
       continue
     }
 
-    // Chapter main title (first line, short, no punctuation at start)
-    if (key === 0 || (key < 3 && trimmed.length < 30 && !trimmed.startsWith('['))) {
-      elements.push(
-        <h1 key={key++} className="chapter-title text-xl sm:text-2xl text-ink dark:text-gray-100 text-center mb-2 tracking-widest">
-          {trimmed}
-        </h1>
-      )
-      continue
-    }
-
     // Image placeholder marker
     if (trimmed === '[]' || trimmed === '[ ]') {
       continue
@@ -48,6 +41,16 @@ function renderContent(text: string) {
     if (trimmed === '---' || trimmed === '***' || trimmed === '* * *') {
       elements.push(
         <div key={key++} className="ornament my-8">· · ·</div>
+      )
+      continue
+    }
+
+    // Section numbers: 一、二、三 etc. — centered, no indent
+    if (SECTION_NUM_RE.test(trimmed)) {
+      elements.push(
+        <p key={key++} className="text-center font-serif text-ink dark:text-gray-200 my-6 tracking-widest" style={{textIndent: 0}}>
+          {trimmed}
+        </p>
       )
       continue
     }
@@ -146,7 +149,7 @@ export default function ChapterPage({ params }: { params: { chapter: string } })
         )}
 
         {/* Chapter content */}
-        <article className="prose-chinese mt-8 text-base sm:text-[1.0625rem]">
+        <article className="prose-chinese mt-8 text-[1.083rem]">
           {renderContent(ch.content)}
         </article>
 
