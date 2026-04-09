@@ -39,7 +39,16 @@ export default function AboutPage() {
 
         <div className="ornament my-10">· · ·</div>
 
-        <div className="text-center">
+        <div className="text-center space-y-4">
+          <p className="font-sans text-sm text-gray-500 dark:text-gray-400 tracking-wide">
+            联系作者：
+            <a
+              href="mailto:chengdongwrites@gmail.com"
+              className="nav-link ml-1"
+            >
+              chengdongwrites@gmail.com
+            </a>
+          </p>
           <Link
             href="/novel"
             className="inline-block font-sans text-sm text-accent dark:text-amber-400 border border-accent/50 dark:border-amber-600/50 px-6 py-2.5 rounded hover:bg-accent hover:text-white dark:hover:bg-amber-700 transition-colors tracking-wide"
