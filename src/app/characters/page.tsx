@@ -198,12 +198,15 @@ export default function CharactersPage() {
 
         <div className="ornament my-10">· · ·</div>
 
-        <div className="text-center flex gap-6 justify-center">
+        <div className="flex items-center justify-between border-t border-amber-200/40 dark:border-gray-800/60 pt-4">
           <Link href="/novel/xuyan" className="font-sans text-sm nav-link tracking-wide">
             ← 序言
           </Link>
-          <Link href="/novel" className="font-sans text-sm nav-link tracking-wide">
-            小说目录 →
+          <Link href="/novel" className="font-sans text-xs text-gray-400 dark:text-gray-500 hover:text-accent dark:hover:text-amber-400 transition-colors tracking-wide">
+            目录
+          </Link>
+          <Link href="/novel/wei-zhi-wu-wei" className="font-sans text-sm nav-link tracking-wide">
+            畏之无畏 →
           </Link>
         </div>
       </main>

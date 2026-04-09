@@ -74,10 +74,13 @@ export default function ChapterPage({ params }: { params: { chapter: string } })
   const prev = idx > 0 ? chapters[idx - 1] : null
   const next = idx < chapters.length - 1 ? chapters[idx + 1] : null
 
+  // 序言的下一步是人物结构说明，不是第一章
+  const isXuyan = ch!.slug === 'xuyan'
+
   const ChapterNav = () => (
     <nav className="flex items-center justify-between py-4 border-t border-amber-200/40 dark:border-gray-800/60">
       <div className="flex-1">
-        {prev && (
+        {isXuyan ? null : prev && (
           <Link
             href={`/novel/${prev.slug}`}
             className="group flex items-center gap-2 text-sm font-sans nav-link"
@@ -97,7 +100,16 @@ export default function ChapterPage({ params }: { params: { chapter: string } })
       </Link>
 
       <div className="flex-1 text-right">
-        {next && (
+        {isXuyan ? (
+          <Link
+            href="/characters"
+            className="group inline-flex items-center gap-2 text-sm font-sans nav-link"
+          >
+            <span className="hidden sm:inline">人物结构说明</span>
+            <span className="sm:hidden">人物</span>
+            <span className="text-base">→</span>
+          </Link>
+        ) : next && (
           <Link
             href={`/novel/${next.slug}`}
             className="group inline-flex items-center gap-2 text-sm font-sans nav-link"
