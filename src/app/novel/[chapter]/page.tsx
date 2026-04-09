@@ -55,6 +55,17 @@ function renderContent(text: string) {
       continue
     }
 
+    // Finale line: [finale]text — centered, larger, distinct
+    if (trimmed.startsWith('[finale]')) {
+      const text = trimmed.slice(8)
+      elements.push(
+        <p key={key++} className="text-center font-serif text-ink dark:text-gray-100 text-xl tracking-widest my-10" style={{textIndent: 0}}>
+          {text}
+        </p>
+      )
+      continue
+    }
+
     // Regular paragraph
     elements.push(
       <p key={key++} className="mb-5" style={{textIndent: '2em'}}>
@@ -153,6 +164,15 @@ export default function ChapterPage({ params }: { params: { chapter: string } })
           )}
           <div className="w-12 h-px bg-accent/40 dark:bg-amber-600/40 mx-auto mt-6" />
         </div>
+
+        {/* Dedication — shown only on 序言 */}
+        {isXuyan && (
+          <div className="text-center mb-10 mt-2">
+            <p className="font-serif text-sm text-gray-400 dark:text-gray-500 tracking-widest italic">
+              献给生命中最温柔的底色
+            </p>
+          </div>
+        )}
 
         {/* Chapter illustration */}
         {ch.image && (

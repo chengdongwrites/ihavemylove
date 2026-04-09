@@ -109,6 +109,18 @@ export default function HomePage() {
                   郭东日
                 </span>
               </Link>
+              <Link
+                href="/voices"
+                className="group flex items-baseline gap-3 py-2.5 px-3 rounded hover:bg-amber-50 dark:hover:bg-gray-900 transition-colors"
+              >
+                <span className="font-sans text-xs text-gray-400 dark:text-gray-600 w-5 flex-shrink-0">声</span>
+                <span className="font-serif text-ink dark:text-gray-200 group-hover:text-accent dark:group-hover:text-amber-400 transition-colors">
+                  文友之声
+                </span>
+                <span className="font-sans text-xs text-gray-400 dark:text-gray-500 hidden sm:inline">
+                  读者留声
+                </span>
+              </Link>
             </div>
           </div>
         </section>

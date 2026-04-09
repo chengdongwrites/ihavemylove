@@ -5,8 +5,11 @@ export default function SiteFooter() {
         <p className="font-serif text-accent dark:text-amber-500 text-base tracking-widest mb-2">
           我有所爱，且为所爱
         </p>
-        <p className="font-sans text-xs text-gray-400 dark:text-gray-600 tracking-wide">
-          洛城东著 · ihavemylove.life
+        <p className="font-sans text-xs text-gray-400 dark:text-gray-600 tracking-wide mb-1">
+          ihavemylove.life · littlepeople.life
+        </p>
+        <p className="font-sans text-xs text-gray-300 dark:text-gray-700 tracking-wide">
+          © 洛城东 · All rights reserved · 版权为作者所有 · 转载请联系 chengdongwrites@gmail.com
         </p>
       </div>
     </footer>

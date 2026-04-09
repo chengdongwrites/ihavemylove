@@ -23,7 +23,13 @@ export default function BaPage() {
           <Link href="/novel" className="font-sans text-xs text-gray-400 dark:text-gray-500 hover:text-accent dark:hover:text-amber-400 transition-colors tracking-wide">
             目录
           </Link>
-          <div className="flex-1" />
+          <div className="flex-1 text-right">
+            <Link href="/voices" className="font-sans text-sm nav-link flex items-center gap-2 justify-end">
+              <span className="hidden sm:inline">文友之声</span>
+              <span className="sm:hidden">文友</span>
+              <span>→</span>
+            </Link>
+          </div>
         </nav>
 
         {/* Header */}
@@ -70,7 +76,13 @@ export default function BaPage() {
           <Link href="/novel" className="font-sans text-xs text-gray-400 dark:text-gray-500 hover:text-accent dark:hover:text-amber-400 transition-colors tracking-wide">
             目录
           </Link>
-          <div className="flex-1" />
+          <div className="flex-1 text-right">
+            <Link href="/voices" className="font-sans text-sm nav-link flex items-center gap-2 justify-end">
+              <span className="hidden sm:inline">文友之声</span>
+              <span className="sm:hidden">文友</span>
+              <span>→</span>
+            </Link>
+          </div>
         </nav>
 
       </main>
