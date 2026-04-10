@@ -56,6 +56,17 @@ export default function VoicesPage() {
           <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">陈颍</span>
         </div>
 
+        <div className="w-full h-px bg-amber-200/30 dark:bg-gray-800/50 my-12" />
+
+        {/* Entry: Desheng Wang */}
+        <article className="prose-chinese text-[1.083rem]">
+          <p>序言就挺有吸引力的。主要是与自己人生轨迹类似。也是心安之处即是家的信奉者。不断突破又达实耕耘。因为是一代最幸运的人们，生活之美就是如作者所言，我有所爱，且当所爱。不只是今生如此，永恒亦如是！</p>
+        </article>
+
+        <div className="text-right mt-6 mb-12">
+          <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">Desheng Wang</span>
+        </div>
+
         <div className="ornament mt-4">· · ·</div>
 
         <div className="text-center mt-4 mb-2">
