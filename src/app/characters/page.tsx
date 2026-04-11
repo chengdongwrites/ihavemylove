@@ -257,6 +257,18 @@ export default function CharactersPage() {
           {renderCharacters(content)}
         </div>
 
+        {/* 人名释义 */}
+        <div className="w-full h-px bg-amber-200/30 dark:bg-gray-800/50 mt-12 mb-2" />
+        <h2 className="chapter-title text-lg text-accent dark:text-amber-400 text-center mt-6 mb-6 tracking-widest border-b border-amber-200/40 dark:border-gray-800 pb-2">
+          人名释义
+        </h2>
+        <div className="prose-chinese text-[1.02rem] space-y-5 text-gray-700 dark:text-gray-300">
+          <p><span className="font-medium text-ink dark:text-gray-100">陆雨峤</span>——"峤"是高峻的山，雨中之峤，有一种被雨雾笼罩却岿然不动的意象。他的名字和他的性格高度吻合：沉稳，高远，不随波逐流。</p>
+          <p><span className="font-medium text-ink dark:text-gray-100">海珘</span>——"珘"字少见，从玉，有珍贵、内敛之意。海与珘，辽阔与精致并置。她和雨峤是一对：一个是陆，一个是海。山海之间，自有天地。然而，珘也带游动漂泊之意。与她标志性的莫兰迪浅蓝一致。</p>
+          <p><span className="font-medium text-ink dark:text-gray-100">杜丹缃</span>——"缃"是浅黄色，初春生长的颜色，也是她标志性的缃黄色长裙的颜色。丹是红，缃是黄，她的名字本身就是一身暖色调，和她温柔稳定的性情完全一致。有意思的是，她的女儿一个叫"小丹"，一个叫"小缃"，老三叫"橙橙"——介乎丹与缃之间，母女、母子之间有着颜色的联线。</p>
+          <p><span className="font-medium text-ink dark:text-gray-100">城东</span>——叙述者的名字最朴素，方位词。他就是那个站在城东看风景的人。</p>
+        </div>
+
         <div className="ornament my-10">· · ·</div>
 
         <div className="flex items-center justify-between border-t border-amber-200/40 dark:border-gray-800/60 pt-4">
