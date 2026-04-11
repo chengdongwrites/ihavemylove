@@ -41,8 +41,12 @@ export default function Comments({ page }: { page: string }) {
       .then(r => r.json())
       .then(d => {
         if (Array.isArray(d)) {
-          setComments(d)
-          setVisible(PAGE_SIZE) // reset to first page when reloading
+          // newest first
+          const sorted = [...d].sort((a, b) =>
+            new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+          )
+          setComments(sorted)
+          setVisible(PAGE_SIZE)
         }
       })
   }
@@ -69,8 +73,8 @@ export default function Comments({ page }: { page: string }) {
     }
   }
 
-  const shown    = comments.slice(0, visible)
-  const hasMore  = visible < comments.length
+  const shown     = comments.slice(0, visible)
+  const hasMore   = comments.length > PAGE_SIZE && visible < comments.length
   const remaining = comments.length - visible
 
   return (

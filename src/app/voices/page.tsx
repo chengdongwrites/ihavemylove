@@ -95,6 +95,17 @@ export default function VoicesPage() {
           <span className="font-sans text-xs text-gray-400 dark:text-gray-500 block mt-1">（作者高中同学）</span>
         </div>
 
+        <div className="w-full h-px bg-amber-200/30 dark:bg-gray-800/50 my-12" />
+
+        {/* Entry: 樱桃木 */}
+        <article className="prose-chinese text-[1.083rem]">
+          <p>二、三十年前来美留学的中国留学生绝大多数以学理工科出身，他们很多当年也是国内大学高考的佼佼者，这部记实小说通过描写几个家庭一代移民在美国的学业和事业，以及他们对第二代的培养，成功地刻画了这批人在美国的生活——生根和发芽。</p>
+        </article>
+
+        <div className="text-right mt-6 mb-12">
+          <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">樱桃木</span>
+        </div>
+
         <div className="ornament mt-4">· · ·</div>
 
         <div className="text-center mt-4 mb-2">
