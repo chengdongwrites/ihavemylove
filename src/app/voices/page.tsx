@@ -83,6 +83,18 @@ export default function VoicesPage() {
           <span className="font-sans text-xs text-gray-400 dark:text-gray-500 block mt-1">（跋作者郭东日三十多年前在辉瑞的上司）</span>
         </div>
 
+        <div className="w-full h-px bg-amber-200/30 dark:bg-gray-800/50 my-12" />
+
+        {/* Entry: 洪宋贞 */}
+        <article className="prose-chinese text-[1.083rem]">
+          <p>这篇小说，使我们能够更加近距离地了解远赴异乡的学子的人生理念、工作情况和家庭生活。他们凭着聪明才智，凭着不懈努力，凭着吃苦耐劳的精神，终于奋斗出不一样的人生。为他们的勇气点赞。</p>
+        </article>
+
+        <div className="text-right mt-6 mb-12">
+          <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">洪宋贞</span>
+          <span className="font-sans text-xs text-gray-400 dark:text-gray-500 block mt-1">（作者高中同学）</span>
+        </div>
+
         <div className="ornament mt-4">· · ·</div>
 
         <div className="text-center mt-4 mb-2">
