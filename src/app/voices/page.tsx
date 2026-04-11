@@ -67,6 +67,20 @@ export default function VoicesPage() {
           <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">Desheng Wang</span>
         </div>
 
+        <div className="w-full h-px bg-amber-200/30 dark:bg-gray-800/50 my-12" />
+
+        {/* Entry: Nina */}
+        <article className="prose-chinese text-[1.083rem]">
+          <p>昨晚读了这部小说，读了序和东日写的跋，便忍不住一口气读完。两位的写作风格都是朴实无华，文笔优美，逻辑清晰。小说里的陆雨峤、谢玉华、海珘这些年轻人，充满理想，在美国加州、达拉斯、纽约、奥斯汀一路奋斗成长，真正印证了"我如何在任何地方栖居"。读常青藤名校，闯荡异乡，这一代人着实不容易，令人佩服。</p>
+
+          <p>读着读着，也想到了我们辉瑞那一代朋友——不也是这样，在人生的旅途中不断 Move、Relocate，让理想落地生根吗？期待东日安排好一切之后，更多地分享美文。</p>
+        </article>
+
+        <div className="text-right mt-6 mb-12">
+          <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">Nina</span>
+          <span className="font-sans text-xs text-gray-400 dark:text-gray-500 block mt-1">（跋作者郭东日三十多年前在辉瑞的上司）</span>
+        </div>
+
         <div className="ornament mt-4">· · ·</div>
 
         <div className="text-center mt-4 mb-2">

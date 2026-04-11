@@ -7,7 +7,7 @@ export const metadata = {
 }
 
 const SECTION_NUM_RE = /^[一二三四五六七八九十]+[、]/
-const PERSON_HEADER_RE = /^[\u4e00-\u9fa5A-Za-z\uff08\uff09（）]+[\u3000　\s]+[男女]/
+const PERSON_HEADER_RE = /^[^\n]+[\u3000　][男女]/
 
 function renderCharacters(text: string) {
   const lines = text.split('\n\n').filter(l => l.trim())
