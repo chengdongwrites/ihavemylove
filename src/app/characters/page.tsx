@@ -7,7 +7,7 @@ export const metadata = {
 }
 
 const SECTION_NUM_RE = /^[一二三四五六七八九十]+[、]/
-const PERSON_HEADER_RE = /^[\u4e00-\u9fa5A-Za-z]+[\u3000　\s]+[男女]/
+const PERSON_HEADER_RE = /^[\u4e00-\u9fa5A-Za-z\uff08\uff09（）]+[\u3000　\s]+[男女]/
 
 function renderCharacters(text: string) {
   const lines = text.split('\n\n').filter(l => l.trim())
@@ -165,7 +165,7 @@ Kamal　男 · 陆雨峤前同事
 
 关系：前辈（陆雨峤、洛城东）
 
-方常　男 · 第一代 · 政界学者
+方常　男 · 第一代 · 政经界学者
 
 中国留美经济学会第七届当选会长，后回国入仕，历任外汇管理局负责人、人民银行行长。
 

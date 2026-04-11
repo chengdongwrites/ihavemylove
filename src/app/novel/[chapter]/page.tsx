@@ -68,6 +68,17 @@ function renderContent(text: string) {
       continue
     }
 
+    // Footnote: [fn]text — small annotation, no indent
+    if (trimmed.startsWith('[fn]')) {
+      const note = trimmed.slice(4)
+      elements.push(
+        <p key={key++} className="font-sans text-xs text-gray-400 dark:text-gray-500 mt-[-12px] mb-5 pl-1 leading-relaxed" style={{textIndent: 0}}>
+          ﹡{note}
+        </p>
+      )
+      continue
+    }
+
     // Regular paragraph
     elements.push(
       <p key={key++} className="mb-5" style={{textIndent: '2em'}}>
