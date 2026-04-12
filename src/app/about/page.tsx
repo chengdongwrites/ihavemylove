@@ -1,5 +1,6 @@
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import Image from 'next/image'
 import Link from 'next/link'
 
 export const metadata = {
@@ -17,6 +18,17 @@ export default function AboutPage() {
             关于作者
           </h1>
           <div className="w-10 h-px bg-accent/40 dark:bg-amber-600/40 mx-auto" />
+        </div>
+
+        <div className="flex justify-center mb-10">
+          <Image
+            src="/images/author.jpg"
+            alt="洛城东"
+            width={320}
+            height={400}
+            className="rounded-lg object-cover shadow-sm"
+            priority
+          />
         </div>
 
         <article className="prose-chinese text-base sm:text-[1.0625rem]">
