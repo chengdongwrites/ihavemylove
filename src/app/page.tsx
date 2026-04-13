@@ -20,8 +20,11 @@ export default function HomePage() {
             <h1 className="chapter-title text-3xl sm:text-4xl md:text-5xl text-ink dark:text-gray-100 mb-4 tracking-widest">
               我有所爱，且为所爱
             </h1>
-            <p className="font-sans text-accent dark:text-amber-400 text-sm tracking-widest mb-8">
+            <p className="font-sans text-accent dark:text-amber-400 text-sm tracking-widest mb-5">
               洛城东著
+            </p>
+            <p className="prose-chinese text-sm sm:text-base text-gray-500 dark:text-gray-400 mb-8 leading-relaxed" style={{textIndent: 0}}>
+              一部跨越三十年的小说，讲述几位当代留学生家庭在时代与生活中寻找安放之处。
             </p>
             <div className="w-16 h-px bg-accent/40 dark:bg-amber-600/40 mx-auto mb-8" />
             <p className="prose-chinese text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed text-center" style={{textIndent: 0}}>
