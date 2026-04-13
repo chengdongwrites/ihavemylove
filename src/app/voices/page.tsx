@@ -106,6 +106,30 @@ export default function VoicesPage() {
           <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">樱桃木</span>
         </div>
 
+        <div className="w-full h-px bg-amber-200/30 dark:bg-gray-800/50 my-12" />
+
+        {/* Entry: 刘芸 */}
+        <article className="prose-chinese text-[1.083rem]">
+          <p>在出差飞行途中读完全篇，二十余分钟后写就：</p>
+
+          <div className="my-6 pl-4 border-l-2 border-amber-200/50 dark:border-amber-900/40">
+            <p className="font-serif text-sm text-ink dark:text-gray-200 tracking-wide mb-3" style={{textIndent: 0}}>
+              【七律】读校友城东长篇小说《我有所爱，且为所爱》
+            </p>
+            <p className="font-serif leading-8 text-gray-700 dark:text-gray-300" style={{textIndent: 0}}>
+              海外扬帆数叶舟，风中学子立潮头。<br />
+              小人物向来追梦，大眼界何曾逐流。<br />
+              半世友情传子女，万言曲笔谱春秋。<br />
+              樱开二度从时令，希冀长存爱永留。
+            </p>
+          </div>
+        </article>
+
+        <div className="text-right mt-6 mb-12">
+          <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">刘芸</span>
+          <span className="font-sans text-xs text-gray-400 dark:text-gray-500 block mt-1">（作者诗友，作于2026年4月13日南飞途中）</span>
+        </div>
+
         <div className="ornament mt-4">· · ·</div>
 
         <div className="text-center mt-4 mb-2">
