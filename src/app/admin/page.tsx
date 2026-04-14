@@ -25,6 +25,25 @@ export default function AdminPage() {
   const [tab, setTab]           = useState<'comments' | 'blocked'>('comments')
   const [loading, setLoading]   = useState(false)
 
+  const SESSION_KEY = 'admin_session'
+  const SESSION_TTL = 24 * 60 * 60 * 1000 // 24 hours in ms
+
+  // Restore session from localStorage on first render
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(SESSION_KEY)
+      if (saved) {
+        const { t, exp } = JSON.parse(saved)
+        if (Date.now() < exp && t) {
+          setToken(t)
+          setAuthed(true)
+        } else {
+          localStorage.removeItem(SESSION_KEY)
+        }
+      }
+    } catch {}
+  }, [])
+
   const headers = useCallback(() => ({
     'Content-Type': 'application/json',
     'x-admin-token': token,
@@ -52,6 +71,8 @@ export default function AdminPage() {
       setAuthed(true)
       setAuthErr(false)
       setComments(await res.json())
+      // Save session for 24 hours
+      localStorage.setItem(SESSION_KEY, JSON.stringify({ t: token, exp: Date.now() + SESSION_TTL }))
     } else {
       setAuthErr(true)
     }
