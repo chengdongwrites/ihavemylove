@@ -130,6 +130,30 @@ export default function VoicesPage() {
           <span className="font-sans text-xs text-gray-400 dark:text-gray-500 block mt-1">（作者诗友，作于2026年4月13日南飞途中）</span>
         </div>
 
+        <div className="w-full h-px bg-amber-200/30 dark:bg-gray-800/50 my-12" />
+
+        {/* Entry: Frank */}
+        <article className="prose-chinese text-[1.083rem]">
+          <p>末章，城东说：</p>
+
+          <blockquote className="border-l-2 border-accent/50 dark:border-amber-600/50 pl-5 my-5 text-gray-600 dark:text-gray-400" style={{textIndent: 0}}>
+            "我觉得，'为'至少有三重含义，由浅而深：为（wèi）了，帮助；被（wéi）；是（wéi）。"
+          </blockquote>
+
+          <p>读者 Frank 读到这里，留言道：</p>
+
+          <blockquote className="border-l-2 border-accent/50 dark:border-amber-600/50 pl-5 my-5 text-gray-600 dark:text-gray-400" style={{textIndent: 0}}>
+            "生而为何，也是这样的三个读音。"
+          </blockquote>
+
+          <p>海德格尔的问题在第一章提出，答案在最后一章给出，而这个"为"字，贯穿始终。</p>
+        </article>
+
+        <div className="text-right mt-6 mb-12">
+          <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">Frank</span>
+          <span className="font-sans text-xs text-gray-400 dark:text-gray-500 block mt-1">（读者留言，《冬之沉静》章）</span>
+        </div>
+
         <div className="ornament mt-4">· · ·</div>
 
         <div className="text-center mt-4 mb-2">
