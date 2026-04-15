@@ -154,6 +154,22 @@ export default function VoicesPage() {
           <span className="font-sans text-xs text-gray-400 dark:text-gray-500 block mt-1">（读者留言，《冬之沉静》章）</span>
         </div>
 
+        {/* Entry: 愚叟 */}
+        <article className="prose-chinese text-[1.083rem]">
+          <p>小说以这两家人及其子女相互关爱的故事展开，对读博撰写论文的苦恼、寻找工作的艰辛、兴趣与事业的纠结、养儿育女的甘苦、爱情友情亲情的分量、生命意义的困惑……做了非常真实的描述，真实得几近新闻报道。</p>
+
+          <p>……正是这种"畏之无畏"的定力，使他在投资回报的巨大诱惑面前适可而止。对他而言，基金规模从来不是目的，而是淬炼心性的道场；守住生活的平衡，不使心为形役，才是他真正的选择。</p>
+
+          <p>其实，"畏"并非只属于哲学家或精英。我们几乎每个人都曾遭遇过它。记得下乡插队的前半年，手握锄把，面对那一眼望不到头的地垄，还有知青点表面平和、暗里鸡争鹅斗的日子，曾感茫然无助、了无生趣——那是我第一次遭遇的"畏"。人的生命和认知都是有限的，但一生中却会多次与它相遇。能做到"畏之无畏"，是一种难得的境界。</p>
+        </article>
+
+        <div className="text-right mt-6 mb-12">
+          <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">愚叟</span>
+          <span className="font-sans text-xs text-gray-400 dark:text-gray-500 block mt-1">（摘自书评《一个特殊群体的特殊视角》）</span>
+        </div>
+
+        <div className="w-full h-px bg-amber-200/30 dark:bg-gray-800/50 my-12" />
+
         <div className="ornament mt-4">· · ·</div>
 
         <div className="text-center mt-4 mb-2">
