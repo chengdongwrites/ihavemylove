@@ -110,14 +110,20 @@ export default function HomePage() {
               </h2>
               <p className="font-sans text-xs text-gray-400 dark:text-gray-500 tracking-wide mb-4">散文集</p>
               <div className="prose-chinese text-sm sm:text-base text-gray-700 dark:text-gray-300">
-                <p>散文是另一种倾听。不是情节，不是对话，而是一个人在自己的生活里，慢慢走，慢慢看，慢慢想。</p>
-                <p>这些文字，写的是里海谷的溪水与芦苇，是故乡记忆里的一条老街，是音乐从耳边穿过时心里的某种震颤。写大地懒的消亡，写时代的漂移，写一个在异乡生根的人，如何与天地作答。</p>
-                <p>以文字为溪，以岁月为岸，行走，静坐，听水，观芦，怀人，思远。</p>
+                <p>这部散文集，是用心思听来的。六十八篇，五个篇章——家园、变迁、美学、存在、寓言。</p>
+                <p>写的是里海谷的四季、走过的路、读书与观物的心得，以及关于存在的叩问。</p>
+                <p>芦苇听风，溪水听石，洛城东听时间。他把听见的写下来，留给愿意一起聆听的人。</p>
               </div>
-              <div className="mt-6">
+              <div className="mt-6 flex gap-4 flex-wrap">
+                <Link
+                  href="/luzexi/xuyan"
+                  className="inline-block font-sans text-sm text-accent dark:text-amber-400 border border-accent/50 dark:border-amber-600/50 px-5 py-2 rounded hover:bg-accent hover:text-white dark:hover:bg-amber-700 transition-colors tracking-wide"
+                >
+                  阅读序言 →
+                </Link>
                 <Link
                   href="/luzexi"
-                  className="inline-block font-sans text-sm text-accent dark:text-amber-400 border border-accent/50 dark:border-amber-600/50 px-5 py-2 rounded hover:bg-accent hover:text-white dark:hover:bg-amber-700 transition-colors tracking-wide"
+                  className="inline-block font-sans text-sm text-gray-500 dark:text-gray-400 border border-gray-300/50 dark:border-gray-700/50 px-5 py-2 rounded hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors tracking-wide"
                 >
                   散文目录 →
                 </Link>
