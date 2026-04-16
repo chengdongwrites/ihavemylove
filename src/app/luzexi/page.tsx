@@ -1,37 +1,42 @@
+import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
-import { essays } from '@/data/essays'
+import { essays, yuyanEssays } from '@/data/essays'
 
 export const metadata = {
   title: '芦泽溪散文集 · 我有所爱，且为所爱',
 }
 
-// Sections with their current status
 const sections = [
   {
     name: '家园篇',
     description: '里海谷的四季、溪径与花木，家的重量与根的延伸。',
     count: essays.filter((e) => e.section === '家园篇').length,
+    href: null,  // not yet open
   },
   {
     name: '变迁篇',
     description: '时代的漂移，记忆的沉淀，个人与历史的交汇处。',
     count: null,
+    href: null,
   },
   {
     name: '存在篇',
     description: '生命与存在的叩问，信天翁的悲欢，以及时间的重量。',
     count: null,
+    href: null,
   },
   {
     name: '寓言篇',
     description: '以寓言之镜照见世道，虚中见实，曲中见直。',
-    count: null,
+    count: yuyanEssays.length,
+    href: '/luzexi/yuyan',
   },
   {
     name: '美学篇',
     description: '音乐、文学、自然之美，以及感知世界的方式。',
     count: null,
+    href: null,
   },
 ]
 
@@ -68,29 +73,48 @@ export default function LuzexiPage() {
           </div>
 
           <div className="grid sm:grid-cols-2 gap-4">
-            {sections.map((section) => (
-              <div
-                key={section.name}
-                className="p-5 rounded-lg border border-amber-200/20 dark:border-gray-800/40 opacity-60"
-              >
-                <div className="flex items-baseline justify-between mb-2">
-                  <span className="font-serif text-base text-ink dark:text-gray-200 tracking-wider">
-                    {section.name}
-                  </span>
-                  <span className="font-sans text-xs text-gray-400 dark:text-gray-600">
-                    {section.count !== null ? `${section.count} 篇` : '待续'}
-                  </span>
+            {sections.map((section) =>
+              section.href ? (
+                <Link
+                  key={section.name}
+                  href={section.href}
+                  className="group block p-5 rounded-lg border border-amber-200/50 dark:border-gray-700/50 hover:bg-amber-50 dark:hover:bg-gray-900 transition-colors"
+                >
+                  <div className="flex items-baseline justify-between mb-2">
+                    <span className="font-serif text-base text-ink dark:text-gray-200 group-hover:text-accent dark:group-hover:text-amber-400 transition-colors tracking-wider">
+                      {section.name}
+                    </span>
+                    <span className="font-sans text-xs text-gray-400 dark:text-gray-600">
+                      {section.count} 篇
+                    </span>
+                  </div>
+                  <p className="font-sans text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                    {section.description}
+                  </p>
+                  <p className="font-sans text-xs text-accent dark:text-amber-500 mt-3 tracking-wide">
+                    阅读全篇 →
+                  </p>
+                </Link>
+              ) : (
+                <div
+                  key={section.name}
+                  className="p-5 rounded-lg border border-amber-200/20 dark:border-gray-800/40 opacity-50"
+                >
+                  <div className="flex items-baseline justify-between mb-2">
+                    <span className="font-serif text-base text-ink dark:text-gray-200 tracking-wider">
+                      {section.name}
+                    </span>
+                    <span className="font-sans text-xs text-gray-400 dark:text-gray-600">
+                      {section.count !== null ? `${section.count} 篇` : '待续'}
+                    </span>
+                  </div>
+                  <p className="font-sans text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
+                    {section.description}
+                  </p>
                 </div>
-                <p className="font-sans text-xs text-gray-500 dark:text-gray-400 leading-relaxed">
-                  {section.description}
-                </p>
-              </div>
-            ))}
+              )
+            )}
           </div>
-
-          <p className="text-center font-sans text-xs text-gray-400 dark:text-gray-600 mt-10 tracking-wide">
-            即将上线 · 敬请期待
-          </p>
         </section>
       </main>
 
