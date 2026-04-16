@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import { essays, yuyanEssays } from '@/data/essays'
@@ -21,6 +22,12 @@ const sections = [
     href: null,
   },
   {
+    name: '美学篇',
+    description: '音乐、文学、自然之美，以及感知世界的方式。',
+    count: null,
+    href: null,
+  },
+  {
     name: '存在篇',
     description: '生命与存在的叩问，信天翁的悲欢，以及时间的重量。',
     count: null,
@@ -32,12 +39,6 @@ const sections = [
     count: yuyanEssays.length,
     href: '/luzexi/yuyan',
   },
-  {
-    name: '美学篇',
-    description: '音乐、文学、自然之美，以及感知世界的方式。',
-    count: null,
-    href: null,
-  },
 ]
 
 export default function LuzexiPage() {
@@ -46,21 +47,41 @@ export default function LuzexiPage() {
       <SiteHeader />
 
       <main className="flex-1">
-        {/* Hero */}
-        <section className="relative py-20 sm:py-28 px-4">
-          <div className="max-w-2xl mx-auto text-center">
-            <h1 className="chapter-title text-3xl sm:text-4xl md:text-5xl text-ink dark:text-gray-100 mb-4 tracking-widest">
-              芦泽溪散文集
-            </h1>
-            <p className="font-sans text-accent dark:text-amber-400 text-sm tracking-widest mb-5">
-              洛城东著
-            </p>
-            <div className="w-16 h-px bg-accent/40 dark:bg-amber-600/40 mx-auto mb-8" />
-            <p className="prose-chinese text-base sm:text-lg text-gray-600 dark:text-gray-400 leading-relaxed text-center" style={{ textIndent: 0 }}>
-              以文字为溪，<br />
-              以岁月为岸，<br />
-              一篇篇写下在异乡生根的心。
-            </p>
+        {/* Hero with cover */}
+        <section className="relative py-16 sm:py-24 px-4">
+          <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center sm:items-start gap-10">
+            {/* Cover image */}
+            <div className="flex-shrink-0">
+              <div className="relative w-44 sm:w-52 shadow-lg rounded overflow-hidden">
+                <Image
+                  src="/images/sanwen-cover.jpg"
+                  alt="《芦泽溪散文集》封面"
+                  width={208}
+                  height={294}
+                  className="w-full h-auto"
+                  priority
+                />
+              </div>
+            </div>
+
+            {/* Title block */}
+            <div className="flex-1 text-center sm:text-left pt-2">
+              <h1 className="chapter-title text-3xl sm:text-4xl md:text-5xl text-ink dark:text-gray-100 mb-4 tracking-widest">
+                芦泽溪散文集
+              </h1>
+              <p className="font-sans text-accent dark:text-amber-400 text-sm tracking-widest mb-5">
+                洛城东著
+              </p>
+              <div className="w-16 h-px bg-accent/40 dark:bg-amber-600/40 mb-6 mx-auto sm:mx-0" />
+              <p className="prose-chinese text-base text-gray-600 dark:text-gray-400 leading-relaxed" style={{ textIndent: 0 }}>
+                以文字为溪，<br />
+                以岁月为岸，<br />
+                一篇篇写下在异乡生根的心。
+              </p>
+              <p className="font-sans text-xs text-gray-400 dark:text-gray-500 mt-5 tracking-wide leading-relaxed">
+                行走·静坐·听水·观芦·怀人·思远
+              </p>
+            </div>
           </div>
         </section>
 
