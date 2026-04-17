@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <!-- Warm parchment background -->
+  <rect width="32" height="32" rx="6" fill="#f5efe6"/>
+
+  <!-- Water ripples at bottom -->
+  <ellipse cx="16" cy="27" rx="10" ry="1.5" fill="none" stroke="#c8a96e" stroke-width="0.8" opacity="0.5"/>
+  <ellipse cx="16" cy="29" rx="7" ry="1" fill="none" stroke="#c8a96e" stroke-width="0.6" opacity="0.3"/>
+
+  <!-- Reed stems -->
+  <line x1="10" y1="26" x2="10" y2="8" stroke="#7a6040" stroke-width="1.1" stroke-linecap="round"/>
+  <line x1="16" y1="26" x2="15" y2="5" stroke="#7a6040" stroke-width="1.1" stroke-linecap="round"/>
+  <line x1="22" y1="26" x2="22" y2="9" stroke="#7a6040" stroke-width="1.1" stroke-linecap="round"/>
+
+  <!-- Reed seed heads -->
+  <ellipse cx="10" cy="8.5" rx="1.8" ry="3.8" fill="#b8956a" opacity="0.85"/>
+  <ellipse cx="15" cy="5.5" rx="1.8" ry="3.8" fill="#a07848" opacity="0.9"/>
+  <ellipse cx="22" cy="9.5" rx="1.8" ry="3.8" fill="#b8956a" opacity="0.85"/>
+
+  <!-- Small leaves on stems -->
+  <path d="M10 17 Q7 15 6 12" stroke="#7a6040" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+  <path d="M15 15 Q18 13 19 10" stroke="#7a6040" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+  <path d="M22 18 Q25 16 25 13" stroke="#7a6040" stroke-width="0.8" fill="none" stroke-linecap="round"/>
+</svg>

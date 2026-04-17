@@ -4,7 +4,7 @@ import SiteFooter from '@/components/SiteFooter'
 import Comments from '@/components/Comments'
 
 export const metadata = {
-  title: '家园篇 · 芦泽溪散文集 · 我有所爱，且为所爱',
+  title: '家园篇 · 芦泽溪散文集',
   description: '里海谷的四季、溪径与花木，家的重量与根的延伸',
   openGraph: {
     title: '家园篇 · 芦泽溪散文集',

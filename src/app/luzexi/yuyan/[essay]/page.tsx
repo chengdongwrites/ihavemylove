@@ -14,8 +14,30 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { essay: string } }) {
   const essay = yuyanEssays.find((e) => e.slug === params.essay)
   if (!essay) return {}
+
+  const firstPara = essay.content
+    .split('\n')
+    .map((l: string) => l.trim())
+    .find((l: string) =>
+      l.length > 20 &&
+      /[\u4e00-\u9fff]/.test(l) &&
+      !l.startsWith('《') &&
+      !l.startsWith('【') &&
+      !l.startsWith('（') &&
+      !l.match(/^[一二三四五六七八九十]+[、．。\s]*$/)
+    )
+  const description = firstPara
+    ? firstPara.slice(0, 80) + (firstPara.length > 80 ? '……' : '')
+    : '寓言篇 · 芦泽溪散文集'
+
   return {
-    title: `${essay.title} · 寓言篇 · 芦泽溪散文集`,
+    title: `${essay.title} · 寓言篇`,
+    description,
+    openGraph: {
+      title: essay.title,
+      description,
+      siteName: '我有所爱',
+    },
   }
 }
 

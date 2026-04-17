@@ -4,7 +4,7 @@ import SiteFooter from '@/components/SiteFooter'
 import Comments from '@/components/Comments'
 
 export const metadata = {
-  title: '美学篇 · 芦泽溪散文集 · 我有所爱，且为所爱',
+  title: '美学篇 · 芦泽溪散文集',
   description: '读书与观物的心得，音乐、文学、自然之美',
   openGraph: {
     title: '美学篇 · 芦泽溪散文集',

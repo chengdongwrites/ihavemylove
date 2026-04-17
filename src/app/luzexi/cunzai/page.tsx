@@ -4,7 +4,7 @@ import SiteFooter from '@/components/SiteFooter'
 import Comments from '@/components/Comments'
 
 export const metadata = {
-  title: '存在篇 · 芦泽溪散文集 · 我有所爱，且为所爱',
+  title: '存在篇 · 芦泽溪散文集',
   description: '生命与存在的叩问——人在世间，究竟如何栖居',
   openGraph: {
     title: '存在篇 · 芦泽溪散文集',

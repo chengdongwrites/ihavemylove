@@ -4,7 +4,7 @@ import SiteFooter from '@/components/SiteFooter'
 import Comments from '@/components/Comments'
 
 export const metadata = {
-  title: '变迁篇 · 芦泽溪散文集 · 我有所爱，且为所爱',
+  title: '变迁篇 · 芦泽溪散文集',
   description: '时代的漂移，记忆的沉淀，个人与历史的交汇处',
   openGraph: {
     title: '变迁篇 · 芦泽溪散文集',

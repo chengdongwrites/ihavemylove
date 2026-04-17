@@ -13,8 +13,33 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { essay: string } }) {
   const essay = getEssayBySlug(params.essay)
   if (!essay) return {}
+
+  const shortTitle = `${essay.title}${essay.subtitle ? ' · ' + essay.subtitle : ''}`
+
+  // Extract first substantial prose paragraph as OG description
+  const firstPara = essay.content
+    .split('\n')
+    .map(l => l.trim())
+    .find(l =>
+      l.length > 20 &&
+      /[\u4e00-\u9fff]/.test(l) &&
+      !l.startsWith('《') &&
+      !l.startsWith('【') &&
+      !l.startsWith('（') &&
+      !l.match(/^[一二三四五六七八九十]+[、．。\s]*$/)
+    )
+  const description = firstPara
+    ? firstPara.slice(0, 80) + (firstPara.length > 80 ? '……' : '')
+    : `${essay.section} · 芦泽溪散文集`
+
   return {
-    title: `${essay.title}${essay.subtitle ? ' · ' + essay.subtitle : ''} · 散文 · 我有所爱，且为所爱`,
+    title: `${shortTitle} · 芦泽溪散文集`,
+    description,
+    openGraph: {
+      title: shortTitle,
+      description,
+      siteName: '我有所爱',
+    },
   }
 }
 
