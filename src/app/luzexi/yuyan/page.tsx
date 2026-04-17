@@ -2,6 +2,7 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import Comments from '@/components/Comments'
+import ViewCounter from '@/components/ViewCounter'
 import { yuyanEssays } from '@/data/essays'
 
 export const metadata = {
@@ -89,8 +90,11 @@ export default function YuyanPage() {
           </p>
         </div>
 
-        {/* Comments */}
+        {/* View counter + Comments */}
         <div className="border-t border-amber-200/40 dark:border-gray-800/60 pt-10">
+          <div className="text-center mb-4">
+            <ViewCounter page="luzexi-yuyan" />
+          </div>
           <Comments page="luzexi-yuyan" />
         </div>
 

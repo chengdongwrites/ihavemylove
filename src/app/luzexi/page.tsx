@@ -3,6 +3,7 @@ import Image from 'next/image'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import Comments from '@/components/Comments'
+import ViewCounter from '@/components/ViewCounter'
 
 export const metadata = {
   title: '芦泽溪散文集',
@@ -189,8 +190,11 @@ export default function LuzexiPage() {
           </div>
         </section>
 
-        {/* Comments */}
+        {/* View counter + Comments */}
         <section className="max-w-2xl mx-auto px-4 sm:px-6 pb-16">
+          <div className="text-center mb-4">
+            <ViewCounter page="luzexi" />
+          </div>
           <Comments page="luzexi" />
         </section>
       </main>

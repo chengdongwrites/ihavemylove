@@ -2,6 +2,7 @@ import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import Comments from '@/components/Comments'
+import ViewCounter from '@/components/ViewCounter'
 
 export const metadata = {
   title: '家园篇 · 芦泽溪散文集',
@@ -83,8 +84,11 @@ export default function JiayuanPage() {
           </p>
         </div>
 
-        {/* Comments */}
+        {/* View counter + Comments */}
         <div className="border-t border-amber-200/40 dark:border-gray-800/60 pt-10">
+          <div className="text-center mb-4">
+            <ViewCounter page="luzexi-jiayuan" />
+          </div>
           <Comments page="luzexi-jiayuan" />
         </div>
 
