@@ -170,6 +170,22 @@ export default function VoicesPage() {
 
         <div className="w-full h-px bg-amber-200/30 dark:bg-gray-800/50 my-12" />
 
+        {/* Entry: 张晓榕 */}
+        <article className="prose-chinese text-[1.083rem]">
+          <p>第一次读城东的《畏之无畏：一个成功后而不安的故事》，还是他今年二月在半杯公众号上分享的时候。不到两个月，小说《我有所爱且为所爱》就诞生了。他从驾轻就熟的散文扩展到长篇小说的创作，这种"畏之无畏"、敢于尝试、敢于表达的勇气，令我敬佩。</p>
+
+          <p>"畏"，于我而言，是危机感，它无时无刻不在。无论承认还是回避，它都躲在"岁月静好"的面纱后面。城东敏感地抓住了"畏"，让它流淌于小说叙事的各个章节里，任读者感同身受、共鸣共情、引发思考。</p>
+
+          <p>小说最后借杜丹湘之口，以"我有所爱，且为所爱"回应了主人公陆雨峤最初的"生而为何"的自我诘问，这是个非常有心的安排！令我感动的是：这个"安排"，是用他三十八年的经历换来的。</p>
+        </article>
+
+        <div className="text-right mt-6 mb-12">
+          <span className="font-serif text-sm text-gray-500 dark:text-gray-400 tracking-wide">张晓榕</span>
+          <span className="font-sans text-xs text-gray-400 dark:text-gray-500 block mt-1">二〇二六年四月十六日</span>
+        </div>
+
+        <div className="w-full h-px bg-amber-200/30 dark:bg-gray-800/50 my-12" />
+
         <div className="ornament mt-4">· · ·</div>
 
         <div className="text-center mt-4 mb-2">
