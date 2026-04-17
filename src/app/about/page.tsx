@@ -2,6 +2,7 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import Image from 'next/image'
 import Link from 'next/link'
+import ViewCounter from '@/components/ViewCounter'
 
 export const metadata = {
   title: '关于作者 · 我有所爱，且为所爱',
@@ -50,6 +51,10 @@ export default function AboutPage() {
         </article>
 
         <div className="ornament my-10">· · ·</div>
+
+        <div className="text-center mb-6">
+          <ViewCounter page="about" />
+        </div>
 
         <div className="text-center space-y-4">
           <p className="font-sans text-sm text-gray-500 dark:text-gray-400 tracking-wide">

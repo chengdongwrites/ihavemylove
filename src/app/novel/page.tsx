@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import ViewCounter from '@/components/ViewCounter'
 import { chapters } from '@/data/chapters'
 
 export const metadata = {
@@ -159,6 +160,9 @@ export default function NovelPage() {
           <p className="font-sans text-xs text-gray-400 dark:text-gray-600 tracking-wide">
             全文共十三章，跨越三十八年
           </p>
+          <div className="mt-3">
+            <ViewCounter page="novel" />
+          </div>
         </div>
       </main>
 
