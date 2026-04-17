@@ -5,6 +5,12 @@ import { chapters } from '@/data/chapters'
 
 export const metadata = {
   title: '小说目录 · 我有所爱，且为所爱',
+  description: '洛城东长篇小说——写小人物的大人生',
+  openGraph: {
+    title: '我有所爱，且为所爱 · 小说目录',
+    description: '洛城东长篇小说——写小人物的大人生',
+    siteName: '我有所爱',
+  },
 }
 
 export default function NovelPage() {

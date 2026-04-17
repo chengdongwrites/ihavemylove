@@ -5,6 +5,16 @@ import SiteFooter from '@/components/SiteFooter'
 import ViewCounter from '@/components/ViewCounter'
 import Comments from '@/components/Comments'
 
+export const metadata = {
+  title: '我有所爱，且为所爱',
+  description: '洛城东长篇小说——写小人物的大人生',
+  openGraph: {
+    title: '我有所爱，且为所爱',
+    description: '洛城东长篇小说——写小人物的大人生',
+    siteName: '我有所爱',
+  },
+}
+
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">

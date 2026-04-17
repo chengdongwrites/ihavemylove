@@ -6,6 +6,12 @@ import { yuyanEssays } from '@/data/essays'
 
 export const metadata = {
   title: '寓言篇 · 芦泽溪散文集 · 我有所爱，且为所爱',
+  description: '以寓言之镜照见世道，虚中见实，曲中见直',
+  openGraph: {
+    title: '寓言篇 · 芦泽溪散文集',
+    description: '以寓言之镜照见世道，虚中见实，曲中见直',
+    siteName: '我有所爱',
+  },
 }
 
 export default function YuyanPage() {

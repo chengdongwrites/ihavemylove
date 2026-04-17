@@ -6,6 +6,12 @@ import Comments from '@/components/Comments'
 
 export const metadata = {
   title: '芦泽溪散文集 · 我有所爱，且为所爱',
+  description: '洛城东散文集——六十八篇，五个篇章，留给愿意一起聆听的人',
+  openGraph: {
+    title: '芦泽溪散文集',
+    description: '洛城东散文集——六十八篇，五个篇章，留给愿意一起聆听的人',
+    siteName: '我有所爱',
+  },
 }
 
 const sections = [

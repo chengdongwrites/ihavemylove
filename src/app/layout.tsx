@@ -3,10 +3,11 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: '我有所爱，且为所爱',
-  description: '洛城东长篇小说——写小人物的大人生',
+  description: '洛城东的文学世界——长篇小说与散文集',
+  metadataBase: new URL('https://www.ihavemylove.life'),
   openGraph: {
     title: '我有所爱，且为所爱',
-    description: '洛城东长篇小说——写小人物的大人生',
+    description: '洛城东的文学世界——长篇小说与散文集',
     siteName: '我有所爱',
   },
 }
