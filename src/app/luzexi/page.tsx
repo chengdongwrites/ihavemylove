@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
+import Comments from '@/components/Comments'
 
 export const metadata = {
   title: '芦泽溪散文集 · 我有所爱，且为所爱',
@@ -11,7 +12,7 @@ const sections = [
   {
     name: '家园篇',
     description: '里海谷的四季、溪径与花木，家的重量与根的延伸。',
-    href: null,
+    href: '/luzexi/jiayuan',
     articles: [
       '芦泽溪径春之初', '常青树礼赞', '朔方的雪', '漫道平常',
       '亲近广玉兰', '木秀于林未可摧', '雨后却斜阳', '两棵番茄苗和两棵向日葵',
@@ -24,7 +25,7 @@ const sections = [
   {
     name: '变迁篇',
     description: '时代的漂移，记忆的沉淀，个人与历史的交汇处。',
-    href: null,
+    href: '/luzexi/bianqian',
     articles: [
       '雨山前', '告别童年', '以女儿的名义', '闲话变异与变迁',
       '那时红叶', '四月天，人间有美赛珍珠', '千屈菜', '又见南山绿',
@@ -35,7 +36,7 @@ const sections = [
   {
     name: '美学篇',
     description: '音乐、文学、自然之美，以及感知世界的方式。',
-    href: null,
+    href: '/luzexi/meixue',
     articles: [
       '相见牡丹时', '银杏叶画的窥视美感', '生活美学——林语堂',
       '听雨的境界', '与万物同席', '从农夫与诗人困境到生活美定理',
@@ -49,7 +50,7 @@ const sections = [
   {
     name: '存在篇',
     description: '生命与存在的叩问，信天翁的悲欢，以及时间的重量。',
-    href: null,
+    href: '/luzexi/cunzai',
     articles: [
       '偶然人生之赌', '大雪后的费纳戈时刻', '信天翁的悲欢离合',
       '冬雾中的溪径行', '秋之盟约', '山凤凰', '技术与救赎',
@@ -115,7 +116,7 @@ export default function LuzexiPage() {
         </section>
 
         {/* Sections */}
-        <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-20">
+        <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
           <div className="flex items-center gap-4 mb-10">
             <div className="flex-1 h-px bg-amber-200/40 dark:bg-gray-800/60" />
             <span className="font-sans text-xs text-gray-400 dark:text-gray-500 tracking-widest uppercase">全集篇目</span>
@@ -123,74 +124,68 @@ export default function LuzexiPage() {
           </div>
 
           <div className="space-y-10">
-            {sections.map((section) => {
-              const isLive = !!section.href
-              return (
-                <div
-                  key={section.name}
-                  className={isLive ? '' : 'opacity-75'}
-                >
-                  {/* Section header */}
-                  <div className="flex items-baseline justify-between mb-3">
-                    {isLive ? (
-                      <Link href={section.href!} className="font-serif text-lg text-ink dark:text-gray-200 hover:text-accent dark:hover:text-amber-400 transition-colors tracking-wider">
-                        {section.name}
-                      </Link>
-                    ) : (
-                      <span className="font-serif text-lg text-ink dark:text-gray-200 tracking-wider">
-                        {section.name}
-                      </span>
-                    )}
-                    <span className="font-sans text-xs text-gray-400 dark:text-gray-600 ml-4">
-                      {section.articles.length} 篇
-                    </span>
-                  </div>
-                  <p className="font-sans text-xs text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
-                    {section.description}
-                  </p>
-
-                  {/* Article list */}
-                  <div className="flex flex-wrap gap-x-1 gap-y-1">
-                    {section.articles.map((article, idx) => {
-                      const isObj = typeof article === 'object'
-                      const title = isObj ? article.title : article
-                      const slug = isObj ? article.slug : null
-                      const isLast = idx === section.articles.length - 1
-
-                      return (
-                        <span key={idx} className="font-sans text-xs text-gray-500 dark:text-gray-400">
-                          {slug ? (
-                            <Link
-                              href={`/luzexi/yuyan/${slug}`}
-                              className="text-accent dark:text-amber-400 hover:underline"
-                            >
-                              {title}
-                            </Link>
-                          ) : (
-                            <span>{title}</span>
-                          )}
-                          {!isLast && <span className="mx-1 text-gray-300 dark:text-gray-700">·</span>}
-                        </span>
-                      )
-                    })}
-                  </div>
-
-                  {isLive && (
-                    <div className="mt-4">
-                      <Link
-                        href={section.href!}
-                        className="font-sans text-xs text-accent dark:text-amber-500 tracking-wide hover:underline"
-                      >
-                        阅读全篇 →
-                      </Link>
-                    </div>
-                  )}
-
-                  <div className="mt-8 h-px bg-amber-100/60 dark:bg-gray-800/40" />
+            {sections.map((section) => (
+              <div key={section.name}>
+                {/* Section header */}
+                <div className="flex items-baseline justify-between mb-3">
+                  <Link
+                    href={section.href}
+                    className="font-serif text-lg text-ink dark:text-gray-200 hover:text-accent dark:hover:text-amber-400 transition-colors tracking-wider"
+                  >
+                    {section.name}
+                  </Link>
+                  <span className="font-sans text-xs text-gray-400 dark:text-gray-600 ml-4">
+                    {section.articles.length} 篇
+                  </span>
                 </div>
-              )
-            })}
+                <p className="font-sans text-xs text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
+                  {section.description}
+                </p>
+
+                {/* Article list */}
+                <div className="flex flex-wrap gap-x-1 gap-y-1">
+                  {section.articles.map((article, idx) => {
+                    const isObj = typeof article === 'object'
+                    const title = isObj ? article.title : article
+                    const slug = isObj ? article.slug : null
+                    const isLast = idx === section.articles.length - 1
+
+                    return (
+                      <span key={idx} className="font-sans text-xs text-gray-500 dark:text-gray-400">
+                        {slug ? (
+                          <Link
+                            href={`/luzexi/yuyan/${slug}`}
+                            className="text-accent dark:text-amber-400 hover:underline"
+                          >
+                            {title}
+                          </Link>
+                        ) : (
+                          <span>{title}</span>
+                        )}
+                        {!isLast && <span className="mx-1 text-gray-300 dark:text-gray-700">·</span>}
+                      </span>
+                    )
+                  })}
+                </div>
+
+                <div className="mt-4">
+                  <Link
+                    href={section.href}
+                    className="font-sans text-xs text-accent dark:text-amber-500 tracking-wide hover:underline"
+                  >
+                    阅读本篇 →
+                  </Link>
+                </div>
+
+                <div className="mt-8 h-px bg-amber-100/60 dark:bg-gray-800/40" />
+              </div>
+            ))}
           </div>
+        </section>
+
+        {/* Comments */}
+        <section className="max-w-2xl mx-auto px-4 sm:px-6 pb-16">
+          <Comments page="luzexi" />
         </section>
       </main>
 

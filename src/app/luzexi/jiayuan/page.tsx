@@ -1,0 +1,90 @@
+import Link from 'next/link'
+import SiteHeader from '@/components/SiteHeader'
+import SiteFooter from '@/components/SiteFooter'
+import Comments from '@/components/Comments'
+
+export const metadata = {
+  title: '家园篇 · 芦泽溪散文集 · 我有所爱，且为所爱',
+}
+
+const articles = [
+  '芦泽溪径春之初', '常青树礼赞', '朔方的雪', '漫道平常',
+  '亲近广玉兰', '木秀于林未可摧', '雨后却斜阳', '两棵番茄苗和两棵向日葵',
+  '离散第一课', '迂回路口', '申学散记一筑梦之冬', '申学散记二守望之春',
+  '申学散记三杏花春雨', '申学散记四硅谷之归', '青杏小小', '秋花金缕梅',
+  '银杏飘飘', '你如盛放我且安眠', '朔方的雪五年后', '当片云不落芦花荡',
+  '浅释字辈歌',
+]
+
+export default function JiayuanPage() {
+  return (
+    <div className="min-h-screen flex flex-col">
+      <SiteHeader />
+
+      <main className="flex-1 max-w-3xl mx-auto px-4 sm:px-6 py-12">
+
+        {/* Breadcrumb */}
+        <div className="mb-10">
+          <Link href="/luzexi" className="font-sans text-xs text-gray-400 dark:text-gray-500 hover:text-accent dark:hover:text-amber-400 transition-colors tracking-widest">
+            ← 芦泽溪散文集
+          </Link>
+        </div>
+
+        {/* Title */}
+        <div className="mb-10 border-b border-amber-200/40 dark:border-gray-800/60 pb-10">
+          <h1 className="chapter-title text-2xl sm:text-3xl text-ink dark:text-gray-100 tracking-widest mb-3">
+            家园篇
+          </h1>
+          <p className="font-sans text-sm text-gray-400 dark:text-gray-500 tracking-wide">
+            洛城东著 · 共二十一篇
+          </p>
+        </div>
+
+        {/* 导言 */}
+        <div className="prose-chinese text-base sm:text-lg text-gray-700 dark:text-gray-300 leading-loose mb-12">
+          <p>家园篇是《芦泽溪散文集》的起点，也是整部集子最深的根。</p>
+
+          <p>里海谷（Leahi Valley）是洛城东定居多年的地方。这里有一条溪，叫芦泽溪，四季随时令变换面目——春天溪径初醒，夏日草木繁茂，秋来银杏金缕，冬时芦花如雪。他在溪边走，在溪边想，把走过的时间一篇篇写下来，成了这二十一篇家园文字。</p>
+
+          <p>开篇《芦泽溪径春之初》，写溪畔初春苏醒的气息，是整部散文集的序幕，也是一个人在异乡重新学习感知的起始。《常青树礼赞》写常青树越冬不凋的姿态，于平静中见出坚守的力量。《朔方的雪》与五年后的重写，隔着岁月遥相呼应，写的是同一场雪，读出的是不同的心境。</p>
+
+          <p>家园篇中最令人动容的，或许是四篇《申学散记》。从《筑梦之冬》到《守望之春》，再到《杏花春雨》与《硅谷之归》，这是一个家庭为孩子申请大学的漫长历程，写焦虑、等待、失落与最终的落定。那段日子并不好过，但洛城东以温柔而清醒的笔触记录下来，让它成为一份可以回望的家族史。</p>
+
+          <p>《离散第一课》写孩子离家去远方读书，初次体会骨肉分离的滋味；《迂回路口》写人生某个不得不绕道的当口，在迂回中重新辨认方向。《浅释字辈歌》则是对家族传承的深情注脚，文字朴素，情意绵长。</p>
+
+          <p>家园，不只是一个地址。洛城东在这二十一篇里，写的是一个人如何在一片土地上，用时间和深情，把异乡变成故乡。</p>
+        </div>
+
+        {/* Article list */}
+        <div className="mb-12">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex-1 h-px bg-amber-200/40 dark:bg-gray-800/60" />
+            <span className="font-sans text-xs text-gray-400 dark:text-gray-500 tracking-widest">篇目</span>
+            <div className="flex-1 h-px bg-amber-200/40 dark:bg-gray-800/60" />
+          </div>
+          <div className="flex flex-wrap gap-x-1 gap-y-1">
+            {articles.map((article, idx) => (
+              <span key={idx} className="font-sans text-sm text-gray-500 dark:text-gray-400">
+                <span>{article}</span>
+                {idx < articles.length - 1 && (
+                  <span className="mx-1 text-gray-300 dark:text-gray-700">·</span>
+                )}
+              </span>
+            ))}
+          </div>
+          <p className="font-sans text-xs text-gray-400 dark:text-gray-600 tracking-wide mt-4">
+            共 {articles.length} 篇
+          </p>
+        </div>
+
+        {/* Comments */}
+        <div className="border-t border-amber-200/40 dark:border-gray-800/60 pt-10">
+          <Comments page="luzexi-jiayuan" />
+        </div>
+
+      </main>
+
+      <SiteFooter />
+    </div>
+  )
+}
