@@ -120,7 +120,7 @@ export default function HomePage() {
               </h2>
               <p className="font-sans text-xs text-gray-400 dark:text-gray-500 tracking-wide mb-4">散文集</p>
               <div className="prose-chinese text-sm sm:text-base text-gray-700 dark:text-gray-300">
-                <p>这部散文集，是用心思听来的。六十八篇，五个篇章——家园、变迁、美学、存在、寓言。</p>
+                <p>这部散文集，是用心思听来的。七十二篇，五个篇章——家园、变迁、美学、存在、寓言。</p>
                 <p>写的是里海谷的四季、走过的路、读书与观物的心得，以及关于存在的叩问。</p>
                 <p>芦苇听风，溪水听石，洛城东听时间。他把听见的写下来，留给愿意一起聆听的人。</p>
               </div>
