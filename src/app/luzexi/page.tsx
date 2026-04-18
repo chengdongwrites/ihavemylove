@@ -7,10 +7,10 @@ import ViewCounter from '@/components/ViewCounter'
 
 export const metadata = {
   title: '芦泽溪散文集',
-  description: '洛城东散文集——六十八篇，五个篇章，留给愿意一起聆听的人',
+  description: '洛城东散文集——七十二篇，五个篇章，留给愿意一起聆听的人',
   openGraph: {
     title: '芦泽溪散文集',
-    description: '洛城东散文集——六十八篇，五个篇章，留给愿意一起聆听的人',
+    description: '洛城东散文集——七十二篇，五个篇章，留给愿意一起聆听的人',
     siteName: '我有所爱',
   },
 }
@@ -25,8 +25,8 @@ const sections = [
       '亲近广玉兰', '木秀于林未可摧', '雨后却斜阳', '两棵番茄苗和两棵向日葵',
       '离散第一课', '迂回路口', '申学散记一筑梦之冬', '申学散记二守望之春',
       '申学散记三杏花春雨', '申学散记四硅谷之归', '青杏小小', '秋花金缕梅',
-      '银杏飘飘', '你如盛放我且安眠', '朔方的雪五年后', '当片云不落芦花荡',
-      '浅释字辈歌',
+      '银杏飘飘', '你如盛放我且安眠', '新雪', '岁寒五梅友',
+      '雪化的声音', '朔方的雪五年后', '当片云不落芦花荡', '浅释字辈歌',
     ],
   },
   {
@@ -38,6 +38,7 @@ const sections = [
       '那时红叶', '四月天，人间有美赛珍珠', '千屈菜', '又见南山绿',
       '时闻折竹声', '无依之地忍冬花', '磨难中的天才——苏东坡',
       '孤山独秀', '棠梨——遥远的记忆', '棠梨牵出12800公里连线', '严寒的逻辑',
+      '静默生死哀思——哈姆奈特观感',
     ],
   },
   {
@@ -107,7 +108,7 @@ export default function LuzexiPage() {
               <div className="w-16 h-px bg-accent/40 dark:bg-amber-600/40 mb-6 mx-auto sm:mx-0" />
               <p className="prose-chinese text-base text-gray-600 dark:text-gray-400 leading-relaxed" style={{ textIndent: 0 }}>
                 这部散文集，是用心思听来的。<br />
-                六十八篇，五个篇章，<br />
+                七十二篇，五个篇章，<br />
                 留给愿意一起聆听的人。
               </p>
               <div className="mt-6">
