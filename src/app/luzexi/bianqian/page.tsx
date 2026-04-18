@@ -19,6 +19,7 @@ const articles = [
   '那时红叶', '四月天，人间有美赛珍珠', '千屈菜', '又见南山绿',
   '时闻折竹声', '无依之地忍冬花', '磨难中的天才——苏东坡',
   '孤山独秀', '棠梨——遥远的记忆', '棠梨牵出12800公里连线', '严寒的逻辑',
+  '静默生死哀思——哈姆奈特观感',
 ]
 
 export default function BianqianPage() {
@@ -41,7 +42,7 @@ export default function BianqianPage() {
             变迁篇
           </h1>
           <p className="font-sans text-sm text-gray-400 dark:text-gray-500 tracking-wide">
-            洛城东著 · 共十五篇
+            洛城东著 · 共十六篇
           </p>
         </div>
 
