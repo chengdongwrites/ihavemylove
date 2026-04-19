@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: { params: { essay: string } }
       title: essay.title,
       description,
       siteName: '我有所爱',
+      ...(essay.image && { images: [`/images/${essay.image}`] }),
     },
   }
 }
