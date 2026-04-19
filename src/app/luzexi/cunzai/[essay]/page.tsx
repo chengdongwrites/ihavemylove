@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: { params: { essay: string } }
     title: `${essay.title} · 存在篇`,
     description,
     openGraph: {
-      title: essay.title,
+      title: `${essay.title} · 存在篇`,
       description,
       siteName: '我有所爱',
       ...(essay.image && { images: [`/images/${essay.image}`] }),
