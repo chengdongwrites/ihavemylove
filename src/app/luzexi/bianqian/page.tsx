@@ -3,6 +3,9 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import Comments from '@/components/Comments'
 import ViewCounter from '@/components/ViewCounter'
+import { bianqianEssays } from '@/data/essays'
+
+const liveArticles = new Map(bianqianEssays.map((e) => [e.title, e.slug]))
 
 export const metadata = {
   title: '变迁篇 · 芦泽溪散文集',
@@ -69,14 +72,26 @@ export default function BianqianPage() {
             <div className="flex-1 h-px bg-amber-200/40 dark:bg-gray-800/60" />
           </div>
           <div className="flex flex-wrap gap-x-1 gap-y-1">
-            {articles.map((article, idx) => (
-              <span key={idx} className="font-sans text-sm text-gray-500 dark:text-gray-400">
-                <span>{article}</span>
-                {idx < articles.length - 1 && (
-                  <span className="mx-1 text-gray-300 dark:text-gray-700">·</span>
-                )}
-              </span>
-            ))}
+            {articles.map((article, idx) => {
+              const slug = liveArticles.get(article)
+              return (
+                <span key={idx} className="font-sans text-sm text-gray-500 dark:text-gray-400">
+                  {slug ? (
+                    <Link
+                      href={`/luzexi/bianqian/${slug}`}
+                      className="text-accent dark:text-amber-400 hover:underline"
+                    >
+                      {article}
+                    </Link>
+                  ) : (
+                    <span>{article}</span>
+                  )}
+                  {idx < articles.length - 1 && (
+                    <span className="mx-1 text-gray-300 dark:text-gray-700">·</span>
+                  )}
+                </span>
+              )
+            })}
           </div>
           <p className="font-sans text-xs text-gray-400 dark:text-gray-600 tracking-wide mt-4">
             共 {articles.length} 篇

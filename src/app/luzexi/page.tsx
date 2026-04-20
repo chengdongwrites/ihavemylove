@@ -4,9 +4,10 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import Comments from '@/components/Comments'
 import ViewCounter from '@/components/ViewCounter'
-import { cunzaiEssays } from '@/data/essays'
+import { cunzaiEssays, bianqianEssays } from '@/data/essays'
 
 const cunzaiLive = new Map(cunzaiEssays.map((e) => [e.title, `/luzexi/cunzai/${e.slug}`]))
+const bianqianLive = new Map(bianqianEssays.map((e) => [e.title, `/luzexi/bianqian/${e.slug}`]))
 
 export const metadata = {
   title: '芦泽溪散文集',
@@ -163,7 +164,8 @@ export default function LuzexiPage() {
 
                     // Check section-specific live links
                     const cunzaiHref = section.name === '存在篇' ? cunzaiLive.get(title) : null
-                    const href = slug ? `/luzexi/yuyan/${slug}` : cunzaiHref ?? null
+                    const bianqianHref = section.name === '变迁篇' ? bianqianLive.get(title) : null
+                    const href = slug ? `/luzexi/yuyan/${slug}` : cunzaiHref ?? bianqianHref ?? null
 
                     return (
                       <span key={idx} className="font-sans text-xs text-gray-500 dark:text-gray-400">
