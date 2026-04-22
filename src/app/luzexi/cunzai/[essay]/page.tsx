@@ -80,7 +80,7 @@ function renderContent(text: string) {
     const subMatch = trimmed.match(SUBHEADING_RE)
     if (subMatch) {
       elements.push(
-        <p key={key++} className="font-serif text-ink dark:text-gray-200 tracking-wide mt-8 mb-3 text-base" style={{ textIndent: 0 }}>
+        <p key={key++} className="font-serif font-bold text-ink dark:text-gray-200 tracking-wide mt-8 mb-3 text-base" style={{ textIndent: 0 }}>
           {subMatch[1]}
         </p>
       )

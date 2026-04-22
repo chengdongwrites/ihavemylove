@@ -172,7 +172,7 @@ export default function LuzexiPage() {
                         {href ? (
                           <Link
                             href={href}
-                            className="text-accent dark:text-amber-400 hover:underline"
+                            className="text-amber-700 dark:text-amber-300 font-medium hover:underline"
                           >
                             {title}
                           </Link>
