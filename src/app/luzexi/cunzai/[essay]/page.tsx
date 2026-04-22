@@ -42,7 +42,10 @@ export async function generateMetadata({ params }: { params: { essay: string } }
   }
 }
 
-const SECTION_NUM_RE = /^[一二三四五六七八九十百]+[、．。\s]*$/
+// 【Section Title】 marker
+const SECTION_TITLE_RE = /^【(.+)】$/
+// Sub-heading: short line, no terminal punctuation, not a list item
+const SUBHEADING_RE = /^「(.+)」$/
 
 function renderContent(text: string) {
   const lines = text.split('\n')
@@ -62,10 +65,23 @@ function renderContent(text: string) {
       continue
     }
 
-    if (SECTION_NUM_RE.test(trimmed)) {
+    // 【Section Title】
+    const secMatch = trimmed.match(SECTION_TITLE_RE)
+    if (secMatch) {
       elements.push(
-        <p key={key++} className="text-center font-serif text-ink dark:text-gray-200 my-6 tracking-widest" style={{ textIndent: 0 }}>
-          {trimmed}
+        <p key={key++} className="text-center font-serif text-accent dark:text-amber-400 tracking-widest my-8 text-base" style={{ textIndent: 0 }}>
+          {secMatch[1]}
+        </p>
+      )
+      continue
+    }
+
+    // 「Sub-heading」
+    const subMatch = trimmed.match(SUBHEADING_RE)
+    if (subMatch) {
+      elements.push(
+        <p key={key++} className="font-serif text-ink dark:text-gray-200 tracking-wide mt-8 mb-3 text-base" style={{ textIndent: 0 }}>
+          {subMatch[1]}
         </p>
       )
       continue
