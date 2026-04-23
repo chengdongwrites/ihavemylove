@@ -142,7 +142,7 @@ function renderContent(
         )
       } else {
         elements.push(
-          <p key={key++} className="font-serif text-ink dark:text-gray-200 tracking-wide mb-1" style={{ textIndent: 0 }}>
+          <p key={key++} className="font-serif italic text-ink dark:text-gray-200 tracking-wide mb-1" style={{ textIndent: 0 }}>
             {content}
           </p>
         )
