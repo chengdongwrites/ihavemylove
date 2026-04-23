@@ -45,13 +45,19 @@ export async function generateMetadata({ params }: { params: { essay: string } }
 
 // Matches 【section title】 markers
 const SECTION_TITLE_RE = /^【(.+)】$/
-// 「poem line or block」 — use ／ as in-line separator for multi-line poem blocks
+// 「poem block」 — use ／ as separator; multi-line renders centered, single renders no-indent
 const POEM_LINE_RE = /^「(.+)」$/
+// 『quoted verse』 — centered, italic (for epigraph ci/poems)
+const VERSE_BLOCK_RE = /^『(.+)』$/
 
-function renderContent(text: string) {
+function renderContent(
+  text: string,
+  inlineImage?: { src: string; caption?: string }
+) {
   const lines = text.split('\n')
   const elements: React.ReactNode[] = []
   let key = 0
+  let inNote = false
 
   for (const line of lines) {
     const trimmed = line.trim()
@@ -66,6 +72,40 @@ function renderContent(text: string) {
       continue
     }
 
+    // 【图】 — inline image at this position
+    if (trimmed === '【图】' && inlineImage) {
+      elements.push(
+        <figure key={key++} className="my-8 text-center">
+          <div className="inline-block max-w-lg w-full mx-auto">
+            <Image
+              src={`/images/${inlineImage.src}`}
+              alt={inlineImage.caption ?? ''}
+              width={745}
+              height={233}
+              className="w-full h-auto rounded shadow-md"
+            />
+          </div>
+          {inlineImage.caption && (
+            <figcaption className="font-sans text-xs text-gray-400 dark:text-gray-500 mt-3 leading-relaxed">
+              {inlineImage.caption}
+            </figcaption>
+          )}
+        </figure>
+      )
+      continue
+    }
+
+    // 【注】 — left-aligned note header; subsequent paragraphs render small
+    if (trimmed === '【注】') {
+      inNote = true
+      elements.push(
+        <p key={key++} className="font-serif font-bold text-ink dark:text-gray-300 mt-10 mb-2" style={{ textIndent: 0 }}>
+          注
+        </p>
+      )
+      continue
+    }
+
     // 【Section Title】 marker
     const sectionMatch = trimmed.match(SECTION_TITLE_RE)
     if (sectionMatch) {
@@ -77,7 +117,19 @@ function renderContent(text: string) {
       continue
     }
 
-    // 「poem line／line／...」 — single no-indent line, or centered block if ／ separators present
+    // 『quoted verse』 — centered italic block, supports ／ line separator
+    const verseMatch = trimmed.match(VERSE_BLOCK_RE)
+    if (verseMatch) {
+      const verseLines = verseMatch[1].split('／')
+      elements.push(
+        <div key={key++} className="text-center font-serif italic text-gray-600 dark:text-gray-400 tracking-wide my-6" style={{ textIndent: 0 }}>
+          {verseLines.map((l, i) => <div key={i}>{l}</div>)}
+        </div>
+      )
+      continue
+    }
+
+    // 「poem block」 — centered (not italic) if ／ present; else no-indent single line
     const poemMatch = trimmed.match(POEM_LINE_RE)
     if (poemMatch) {
       const content = poemMatch[1]
@@ -111,6 +163,16 @@ function renderContent(text: string) {
       continue
     }
 
+    // Note body — smaller text, no indent
+    if (inNote) {
+      elements.push(
+        <p key={key++} className="text-sm text-gray-500 dark:text-gray-400 mb-2 leading-relaxed" style={{ textIndent: 0 }}>
+          {trimmed}
+        </p>
+      )
+      continue
+    }
+
     elements.push(
       <p key={key++} className="mb-5" style={{ textIndent: '2em' }}>
         {trimmed}
@@ -124,6 +186,8 @@ function renderContent(text: string) {
 export default function BianqianEssayPage({ params }: { params: { essay: string } }) {
   const essay = bianqianEssays.find((e) => e.slug === params.essay)
   if (!essay) notFound()
+
+  const hasInlineImage = essay.image && essay.content.includes('【图】')
 
   const idx = bianqianEssays.findIndex((e) => e.slug === params.essay)
   const prev = idx > 0 ? bianqianEssays[idx - 1] : null
@@ -178,8 +242,8 @@ export default function BianqianEssayPage({ params }: { params: { essay: string 
           <div className="w-12 h-px bg-accent/40 dark:bg-amber-600/40 mx-auto mt-6" />
         </div>
 
-        {/* Illustration */}
-        {essay.image && (
+        {/* Illustration — only at top if not using inline 【图】 placement */}
+        {essay.image && !hasInlineImage && (
           <figure className="my-8 text-center">
             <div className="inline-block max-w-sm w-full mx-auto">
               <Image
@@ -200,7 +264,10 @@ export default function BianqianEssayPage({ params }: { params: { essay: string 
 
         {/* Essay content */}
         <article className="prose-chinese mt-8 text-[1.083rem]">
-          {renderContent(essay.content)}
+          {renderContent(
+            essay.content,
+            hasInlineImage ? { src: essay.image!, caption: essay.imageCaption } : undefined
+          )}
         </article>
 
         <div className="ornament mt-12">· · ·</div>
