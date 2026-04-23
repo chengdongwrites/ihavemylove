@@ -45,6 +45,8 @@ export async function generateMetadata({ params }: { params: { essay: string } }
 
 // Matches 【section title】 markers
 const SECTION_TITLE_RE = /^【(.+)】$/
+// 「poem line or block」 — use ／ as in-line separator for multi-line poem blocks
+const POEM_LINE_RE = /^「(.+)」$/
 
 function renderContent(text: string) {
   const lines = text.split('\n')
@@ -72,6 +74,27 @@ function renderContent(text: string) {
           {sectionMatch[1]}
         </p>
       )
+      continue
+    }
+
+    // 「poem line／line／...」 — single no-indent line, or centered block if ／ separators present
+    const poemMatch = trimmed.match(POEM_LINE_RE)
+    if (poemMatch) {
+      const content = poemMatch[1]
+      const poemLines = content.split('／')
+      if (poemLines.length > 1) {
+        elements.push(
+          <div key={key++} className="text-center font-serif text-ink dark:text-gray-200 tracking-wide my-6" style={{ textIndent: 0 }}>
+            {poemLines.map((l, i) => <div key={i}>{l}</div>)}
+          </div>
+        )
+      } else {
+        elements.push(
+          <p key={key++} className="font-serif text-ink dark:text-gray-200 tracking-wide mb-1" style={{ textIndent: 0 }}>
+            {content}
+          </p>
+        )
+      }
       continue
     }
 
