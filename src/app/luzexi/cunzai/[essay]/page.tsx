@@ -121,9 +121,12 @@ function renderContent(text: string) {
     if (secMatch) {
       inNote = false
       elements.push(
-        <p key={key++} className="text-center font-serif text-accent dark:text-amber-400 tracking-widest my-8 text-base" style={{ textIndent: 0 }}>
-          {secMatch[1]}
-        </p>
+        <div key={key++} className="text-center my-10" style={{ textIndent: 0 }}>
+          <p className="font-serif text-xl text-accent dark:text-amber-400 tracking-widest mb-3">
+            {secMatch[1]}
+          </p>
+          <div className="w-10 h-px bg-accent/50 dark:bg-amber-600/50 mx-auto" />
+        </div>
       )
       continue
     }
