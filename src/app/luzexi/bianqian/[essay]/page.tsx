@@ -68,7 +68,16 @@ function renderContent(
     }
 
     if (trimmed === '---' || trimmed === '***') {
+      inNote = false
       elements.push(<div key={key++} className="ornament my-8">· · ·</div>)
+      continue
+    }
+
+    // ★ — poem stanza divider
+    if (trimmed === '★') {
+      elements.push(
+        <div key={key++} className="text-center text-gray-300 dark:text-gray-600 my-4 text-sm tracking-widest">★</div>
+      )
       continue
     }
 
