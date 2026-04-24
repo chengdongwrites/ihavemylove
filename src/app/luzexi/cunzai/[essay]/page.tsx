@@ -151,7 +151,7 @@ function renderContent(text: string) {
       continue
     }
 
-    if (trimmed.match(/^[（(]20\d\d/) && (trimmed.endsWith('）') || trimmed.endsWith(')'))) {
+    if ((trimmed.startsWith('（') || trimmed.startsWith('(')) && (trimmed.endsWith('）') || trimmed.endsWith(')'))) {
       elements.push(
         <p key={key++} className="text-right font-sans text-xs text-gray-400 dark:text-gray-500 mt-8 mb-2" style={{ textIndent: 0 }}>
           {trimmed}
