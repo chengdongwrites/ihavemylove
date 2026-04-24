@@ -44,13 +44,18 @@ export async function generateMetadata({ params }: { params: { essay: string } }
 
 // 【Section Title】 marker
 const SECTION_TITLE_RE = /^【(.+)】$/
-// Sub-heading: short line, no terminal punctuation, not a list item
+// 「Sub-heading」
 const SUBHEADING_RE = /^「(.+)」$/
+// 『Quoted verse』 — centered italic; use ／ as line separator
+const VERSE_BLOCK_RE = /^『(.+)』$/
+// 【图:filename:caption】 — inline image
+const INLINE_IMG_RE = /^【图:([^:]+):(.*)】$/
 
 function renderContent(text: string) {
   const lines = text.split('\n')
   const elements: React.ReactNode[] = []
   let key = 0
+  let inNote = false
 
   for (const line of lines) {
     const trimmed = line.trim()
@@ -61,13 +66,60 @@ function renderContent(text: string) {
     }
 
     if (trimmed === '---' || trimmed === '***') {
+      inNote = false
       elements.push(<div key={key++} className="ornament my-8">· · ·</div>)
+      continue
+    }
+
+    // ★ — poem stanza divider
+    if (trimmed === '★') {
+      elements.push(
+        <div key={key++} className="text-center text-gray-300 dark:text-gray-600 my-4 text-sm tracking-widest">★</div>
+      )
+      continue
+    }
+
+    // 【图:filename:caption】 — inline image
+    const imgMatch = trimmed.match(INLINE_IMG_RE)
+    if (imgMatch) {
+      const [, filename, caption] = imgMatch
+      elements.push(
+        <figure key={key++} className="my-10 text-center">
+          <div className="inline-block max-w-lg w-full mx-auto">
+            <Image
+              src={`/images/${filename}`}
+              alt={caption || ''}
+              width={745}
+              height={428}
+              className="w-full h-auto rounded shadow-md"
+            />
+          </div>
+          {caption && (
+            <figcaption className="font-sans text-xs text-gray-400 dark:text-gray-500 mt-3 leading-relaxed max-w-md mx-auto">
+              {caption}
+            </figcaption>
+          )}
+        </figure>
+      )
+      continue
+    }
+
+    // 【注】or 【注释】 — left-aligned note/reference header
+    if (trimmed === '【注】' || trimmed === '【注释】') {
+      inNote = true
+      const label = trimmed === '【注释】' ? '注释' : '注'
+      elements.push(
+        <p key={key++} className="font-serif font-bold text-ink dark:text-gray-300 mt-10 mb-3" style={{ textIndent: 0 }}>
+          {label}
+        </p>
+      )
       continue
     }
 
     // 【Section Title】
     const secMatch = trimmed.match(SECTION_TITLE_RE)
     if (secMatch) {
+      inNote = false
       elements.push(
         <p key={key++} className="text-center font-serif text-accent dark:text-amber-400 tracking-widest my-8 text-base" style={{ textIndent: 0 }}>
           {secMatch[1]}
@@ -76,7 +128,19 @@ function renderContent(text: string) {
       continue
     }
 
-    // 「Sub-heading」
+    // 『Quoted verse』 — centered italic, supports ／ line separator
+    const verseMatch = trimmed.match(VERSE_BLOCK_RE)
+    if (verseMatch) {
+      const verseLines = verseMatch[1].split('／')
+      elements.push(
+        <div key={key++} className="text-center font-serif italic text-gray-600 dark:text-gray-400 tracking-wide my-6" style={{ textIndent: 0 }}>
+          {verseLines.map((l, i) => <div key={i}>{l}</div>)}
+        </div>
+      )
+      continue
+    }
+
+    // 「Sub-heading」 — bold left-aligned
     const subMatch = trimmed.match(SUBHEADING_RE)
     if (subMatch) {
       elements.push(
@@ -90,6 +154,16 @@ function renderContent(text: string) {
     if (trimmed.match(/^[（(]20\d\d/) && (trimmed.endsWith('）') || trimmed.endsWith(')'))) {
       elements.push(
         <p key={key++} className="text-right font-sans text-xs text-gray-400 dark:text-gray-500 mt-8 mb-2" style={{ textIndent: 0 }}>
+          {trimmed}
+        </p>
+      )
+      continue
+    }
+
+    // Note body — small text, no indent
+    if (inNote) {
+      elements.push(
+        <p key={key++} className="text-sm text-gray-500 dark:text-gray-400 mb-3 leading-relaxed" style={{ textIndent: 0 }}>
           {trimmed}
         </p>
       )
@@ -113,6 +187,7 @@ export default function CunzaiEssayPage({ params }: { params: { essay: string } 
   const idx = cunzaiEssays.findIndex((e) => e.slug === params.essay)
   const prev = idx > 0 ? cunzaiEssays[idx - 1] : null
   const next = idx < cunzaiEssays.length - 1 ? cunzaiEssays[idx + 1] : null
+  const hasInlineImages = essay.content.includes('【图:')
 
   const EssayNav = () => (
     <nav className="flex items-center justify-between py-4 border-t border-amber-200/40 dark:border-gray-800/60">
@@ -163,8 +238,8 @@ export default function CunzaiEssayPage({ params }: { params: { essay: string } 
           <div className="w-12 h-px bg-accent/40 dark:bg-amber-600/40 mx-auto mt-6" />
         </div>
 
-        {/* Illustration */}
-        {essay.image && (
+        {/* Illustration — skipped when images are placed inline via 【图:...】 */}
+        {essay.image && !hasInlineImages && (
           <figure className="my-8 text-center">
             <div className="inline-block max-w-sm w-full mx-auto">
               <Image
