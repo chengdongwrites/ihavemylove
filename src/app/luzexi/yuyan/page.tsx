@@ -54,39 +54,33 @@ export default function YuyanPage() {
           <p>三篇读罢，合上书，世界还是那个世界，但你看它的眼睛，或许已经不同。</p>
         </div>
 
-        {/* Essays */}
-        <div className="space-y-1 mb-12">
-          {yuyanEssays.map((essay, idx) => (
-            <Link
-              key={essay.slug}
-              href={`/luzexi/yuyan/${essay.slug}`}
-              className="group flex items-start gap-4 py-4 px-4 rounded-lg hover:bg-amber-50 dark:hover:bg-gray-900 transition-colors border border-transparent hover:border-amber-200/50 dark:hover:border-gray-700/50"
-            >
-              <div className="flex-shrink-0 w-8 text-center pt-0.5">
-                <span className="font-sans text-xs text-gray-400 dark:text-gray-600 tabular-nums">
-                  {String(idx + 1).padStart(2, '0')}
+        {/* Article list */}
+        <div className="mb-12">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="flex-1 h-px bg-amber-200/40 dark:bg-gray-800/60" />
+            <span className="font-sans text-xs text-gray-400 dark:text-gray-500 tracking-widest">篇目</span>
+            <div className="flex-1 h-px bg-amber-200/40 dark:bg-gray-800/60" />
+          </div>
+          <div className="flex flex-wrap gap-x-1 gap-y-1">
+            {yuyanEssays.map((essay, idx) => {
+              const isLast = idx === yuyanEssays.length - 1
+              return (
+                <span key={essay.slug} className="font-sans text-sm text-gray-500 dark:text-gray-400">
+                  <Link
+                    href={`/luzexi/yuyan/${essay.slug}`}
+                    className="text-amber-700 dark:text-amber-300 font-medium hover:underline"
+                  >
+                    {essay.title}
+                  </Link>
+                  {!isLast && (
+                    <span className="mx-1 text-gray-400 dark:text-gray-500 text-base">·</span>
+                  )}
                 </span>
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="font-serif text-base text-ink dark:text-gray-200 group-hover:text-accent dark:group-hover:text-amber-400 transition-colors leading-snug">
-                  {essay.title}
-                </div>
-                {essay.subtitle && (
-                  <div className="font-sans text-sm text-gray-400 dark:text-gray-500 mt-1">
-                    {essay.subtitle}
-                  </div>
-                )}
-              </div>
-              <div className="flex-shrink-0 text-gray-300 dark:text-gray-700 group-hover:text-accent dark:group-hover:text-amber-600 transition-colors pt-0.5">
-                →
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        <div className="mb-10 text-center">
-          <p className="font-sans text-xs text-gray-400 dark:text-gray-600 tracking-wide">
-            共三篇
+              )
+            })}
+          </div>
+          <p className="font-sans text-xs text-gray-400 dark:text-gray-600 tracking-wide mt-4">
+            共 {yuyanEssays.length} 篇
           </p>
         </div>
 
