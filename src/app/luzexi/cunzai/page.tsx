@@ -82,7 +82,7 @@ export default function CunzaiPage() {
                   {slug ? (
                     <Link
                       href={`/luzexi/cunzai/${slug}`}
-                      className="text-accent dark:text-amber-400 hover:underline"
+                      className="text-amber-700 dark:text-amber-300 font-medium hover:underline"
                     >
                       {article}
                     </Link>
