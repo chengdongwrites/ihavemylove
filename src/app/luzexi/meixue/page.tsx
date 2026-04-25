@@ -77,7 +77,7 @@ export default function MeixuePage() {
               <span key={idx} className="font-sans text-sm text-gray-500 dark:text-gray-400">
                 <span>{article}</span>
                 {idx < articles.length - 1 && (
-                  <span className="mx-1 text-gray-300 dark:text-gray-700">·</span>
+                  <span className="mx-1 text-gray-400 dark:text-gray-500 text-base">·</span>
                 )}
               </span>
             ))}
