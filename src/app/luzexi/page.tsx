@@ -155,7 +155,7 @@ export default function LuzexiPage() {
                 </p>
 
                 {/* Article list */}
-                <div className="flex flex-wrap gap-x-1 gap-y-1">
+                <div className="flex flex-wrap gap-x-1 gap-y-1 items-baseline">
                   {section.articles.map((article, idx) => {
                     const isObj = typeof article === 'object'
                     const title = isObj ? article.title : article

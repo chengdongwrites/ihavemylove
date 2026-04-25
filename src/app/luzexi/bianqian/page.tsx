@@ -71,7 +71,7 @@ export default function BianqianPage() {
             <span className="font-sans text-xs text-gray-400 dark:text-gray-500 tracking-widest">篇目</span>
             <div className="flex-1 h-px bg-amber-200/40 dark:bg-gray-800/60" />
           </div>
-          <div className="flex flex-wrap gap-x-1 gap-y-1">
+          <div className="flex flex-wrap gap-x-1 gap-y-1 items-baseline">
             {articles.map((article, idx) => {
               const slug = liveArticles.get(article)
               return (
