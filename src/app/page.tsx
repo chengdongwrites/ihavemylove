@@ -142,13 +142,33 @@ export default function HomePage() {
           </div>
         </section>
 
+        {/* 诗词 */}
+        <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+          <div className="flex items-center gap-4 mb-8">
+            <div className="flex-1 h-px bg-amber-200/40 dark:bg-gray-800/60" />
+            <span className="font-sans text-xs text-gray-400 dark:text-gray-500 tracking-widest uppercase">诗词</span>
+            <div className="flex-1 h-px bg-amber-200/40 dark:bg-gray-800/60" />
+          </div>
+
+          <div className="flex-1">
+            <h2 className="chapter-title text-lg text-accent dark:text-amber-400 mb-1 tracking-wider">
+              诗词集
+            </h2>
+            <p className="font-sans text-xs text-gray-400 dark:text-gray-500 tracking-wide mb-4">诗词创作</p>
+            <div className="prose-chinese text-sm sm:text-base text-gray-700 dark:text-gray-300">
+              <p>诗词写作，是洛城东心底最爱。片言只语的日积月累，已过千首，是他散文和小说中处处浮现的诗心与词魂。</p>
+              <p className="font-sans text-xs text-gray-400 dark:text-gray-500 mt-4 tracking-wide">即将上线</p>
+            </div>
+          </div>
+        </section>
+
         {/* About section */}
         <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
           <div className="border-t border-amber-200/40 dark:border-gray-800/60 pt-12">
             <div className="bg-amber-50/60 dark:bg-gray-900/60 rounded-lg p-6 sm:p-8">
               <h2 className="chapter-title text-lg text-ink dark:text-gray-100 tracking-wider mb-4">关于作者</h2>
               <p className="prose-chinese text-sm sm:text-base text-gray-700 dark:text-gray-300">
-                笔名洛城东。理工人，居美多年，写他所熟悉的一群留学生，写小人物在现实世界里如何栖居，如何在任何地方扎根，活出自己的答案。
+                笔名洛城东，取于2007年，当时身居洛杉矶东部。喜爱文学的理科生，从事独立投资和写作。著有长篇小说《我有所爱，且为所爱》、《芦泽溪散文集》，并有诗词千余首。
               </p>
               <div className="mt-4">
                 <Link
