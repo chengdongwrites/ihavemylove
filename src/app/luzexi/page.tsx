@@ -129,6 +129,13 @@ export default function LuzexiPage() {
 
         {/* Sections */}
         <section className="max-w-3xl mx-auto px-4 sm:px-6 pb-16">
+          {/* Dedication */}
+          <div className="text-center mb-12">
+            <p className="font-serif italic text-gray-500 dark:text-gray-400 tracking-wide text-sm">
+              谨以此书献给父母、亲人好友。
+            </p>
+          </div>
+
           <div className="flex items-center gap-4 mb-10">
             <div className="flex-1 h-px bg-amber-200/40 dark:bg-gray-800/60" />
             <span className="font-sans text-xs text-gray-400 dark:text-gray-500 tracking-widest uppercase">全集篇目</span>
