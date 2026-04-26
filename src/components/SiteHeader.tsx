@@ -11,6 +11,7 @@ export default function SiteHeader() {
         <nav className="flex items-center gap-4 sm:gap-6 text-sm font-sans">
           <Link href="/novel" className="nav-link tracking-wide">小说</Link>
           <Link href="/luzexi" className="nav-link tracking-wide">散文</Link>
+          <Link href="/shici" className="nav-link tracking-wide">诗词</Link>
           <Link href="/about" className="nav-link tracking-wide">作者</Link>
           <ThemeToggle />
         </nav>

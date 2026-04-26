@@ -23,7 +23,7 @@ export const metadata = {
 const sections = [
   {
     name: '家园篇',
-    description: '里海谷的四季、溪径与花木，家的重量与根的延伸。',
+    description: '溪径与花木，海谷的四季，家的重量与根的延伸。',
     href: '/luzexi/jiayuan',
     articles: [
       '芦泽溪径春之初', '常青树礼赞', '朔方的雪', '漫道平常',
@@ -158,7 +158,7 @@ export default function LuzexiPage() {
                     {section.articles.length} 篇
                   </span>
                 </div>
-                <p className="font-sans text-xs text-gray-500 dark:text-gray-400 mb-4 leading-relaxed">
+                <p className="font-sans text-xs italic text-gray-400 dark:text-gray-500 mb-4 leading-relaxed">
                   {section.description}
                 </p>
 
