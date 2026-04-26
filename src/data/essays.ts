@@ -2819,7 +2819,7 @@ export const jiayuanEssays: Essay[] = [
     subtitle: "",
     section: "家园篇",
     image: "jiayuan-luzexi-jing.png",
-    imageCaption: "ChatGPT-4o所作"芦泽溪径"诗意配图",
+    imageCaption: 'ChatGPT-4o所作\u201c芦泽溪径\u201d诗意配图',
     content: `【图:jiayuan-luzexi-jing.png:ChatGPT-4o所作"芦泽溪径"诗意配图】
 
 每年冬末春初，我都会行走在这条静默的溪径之上。它不为人知，却藏着春天最初的秘密。这一次，我带来几首诗词和一段心境，与你共听溪水初醒的声音。
