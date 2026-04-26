@@ -145,21 +145,82 @@ function renderContent(text: string) {
       continue
     }
 
-    // 《poem title》 — centered amber, larger font, shifted slightly left
+    // 《poem title》 — look ahead to attach title directly to its poem/ci block
+    // so the title naturally centers over the poem body
     if (POEM_TITLE_RE.test(trimmed)) {
+      const title = trimmed
+      // skip blank lines to find next content
+      let look = i
+      while (look < lines.length && !lines[look].trim()) look++
+      const nextTrimmed = look < lines.length ? lines[look].trim() : ''
+
+      if (CI_STANZA_RE.test(nextTrimmed)) {
+        // Collect all ci stanzas and render title inside the flex block
+        const allStanzas: string[][] = []
+        let j = look
+        while (j < lines.length) {
+          const t = lines[j].trim()
+          const m = t.match(CI_STANZA_RE)
+          if (m) {
+            allStanzas.push(m[1].split('／'))
+            j++
+          } else if (!t) {
+            let k = j + 1
+            while (k < lines.length && !lines[k].trim()) k++
+            if (k < lines.length && CI_STANZA_RE.test(lines[k].trim())) {
+              j = k
+            } else { break }
+          } else { break }
+        }
+        i = j
+        elements.push(
+          <div key={key++} className="flex justify-center my-3 mt-5" style={{ textIndent: 0 }}>
+            <div>
+              <p className="text-center font-serif text-lg text-accent dark:text-amber-400 tracking-wide mb-2" style={{ textIndent: 0 }}>
+                {title}
+              </p>
+              <div className="font-serif italic text-gray-600 dark:text-gray-400 tracking-wide text-left leading-relaxed">
+                {allStanzas.map((stanza, si) => (
+                  <div key={si}>
+                    {si > 0 && <div className="h-3" />}
+                    {stanza.map((l, li) => <div key={li}>{l}</div>)}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )
+        continue
+      }
+
+      if (VERSE_RE.test(nextTrimmed)) {
+        // Render title inside the verse block
+        const verseMatch = nextTrimmed.match(VERSE_RE)!
+        const verseLines = verseMatch[1].split('／')
+        i = look + 1
+        elements.push(
+          <div key={key++} className="text-center font-serif italic text-gray-600 dark:text-gray-400 tracking-wide my-3 mt-5" style={{ textIndent: 0 }}>
+            <p className="not-italic text-lg text-accent dark:text-amber-400 mb-2" style={{ textIndent: 0 }}>
+              {title}
+            </p>
+            {verseLines.map((l, li) => <div key={li}>{l}</div>)}
+          </div>
+        )
+        continue
+      }
+
+      // No poem follows — render title standalone
       elements.push(
-        <p key={key++} className="text-center font-serif text-lg text-accent dark:text-amber-400 tracking-wide mt-8 mb-2" style={{ textIndent: 0, paddingRight: '2em' }}>
-          {trimmed}
+        <p key={key++} className="text-center font-serif text-lg text-accent dark:text-amber-400 tracking-wide mt-5 mb-2" style={{ textIndent: 0 }}>
+          {title}
         </p>
       )
       continue
     }
 
-    // 「ci stanza」 — collect ALL consecutive stanzas into one block so they
-    // share the same left edge (fixes 上阕/下阕 alignment)
+    // 「ci stanza」 without preceding title — fallback grouping
     if (CI_STANZA_RE.test(trimmed)) {
       const allStanzas: string[][] = []
-      // collect this stanza and any that follow (separated by blank lines only)
       let j = i - 1
       while (j < lines.length) {
         const t = lines[j].trim()
@@ -168,21 +229,16 @@ function renderContent(text: string) {
           allStanzas.push(m[1].split('／'))
           j++
         } else if (!t) {
-          // blank line — peek further
           let k = j + 1
           while (k < lines.length && !lines[k].trim()) k++
           if (k < lines.length && CI_STANZA_RE.test(lines[k].trim())) {
-            j = k // skip blanks, continue collecting
-          } else {
-            break // next non-blank is not a stanza
-          }
-        } else {
-          break
-        }
+            j = k
+          } else { break }
+        } else { break }
       }
-      i = j // advance main loop
+      i = j
       elements.push(
-        <div key={key++} className="flex justify-center my-4" style={{ textIndent: 0 }}>
+        <div key={key++} className="flex justify-center my-3" style={{ textIndent: 0 }}>
           <div className="font-serif italic text-gray-600 dark:text-gray-400 tracking-wide text-left leading-relaxed">
             {allStanzas.map((stanza, si) => (
               <div key={si}>
@@ -196,13 +252,13 @@ function renderContent(text: string) {
       continue
     }
 
-    // 『verse lines』 — each line centered, italic (诗)
+    // 『verse lines』 — each line centered, italic (诗), no preceding title
     const verseMatch = trimmed.match(VERSE_RE)
     if (verseMatch) {
       const verseLines = verseMatch[1].split('／')
       elements.push(
-        <div key={key++} className="text-center font-serif italic text-gray-600 dark:text-gray-400 tracking-wide my-6" style={{ textIndent: 0 }}>
-          {verseLines.map((l, i) => <div key={i}>{l}</div>)}
+        <div key={key++} className="text-center font-serif italic text-gray-600 dark:text-gray-400 tracking-wide my-3" style={{ textIndent: 0 }}>
+          {verseLines.map((l, vi) => <div key={vi}>{l}</div>)}
         </div>
       )
       continue
