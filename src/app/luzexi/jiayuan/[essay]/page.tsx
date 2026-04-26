@@ -44,6 +44,8 @@ export async function generateMetadata({ params }: { params: { essay: string } }
   }
 }
 
+// 【前言】preface line
+const PREFACE_RE = /^【前言】(.+)$/
 // 《poem title》 on its own line
 const POEM_TITLE_RE = /^《.+》$/
 // 「ci stanza」 — block-centered, left-aligned, italic (词)
@@ -60,9 +62,11 @@ function renderContent(text: string) {
   const elements: React.ReactNode[] = []
   let key = 0
   let inNote = false
+  let i = 0
 
-  for (const line of lines) {
-    const trimmed = line.trim()
+  while (i < lines.length) {
+    const trimmed = lines[i].trim()
+    i++
 
     if (!trimmed) {
       elements.push(<div key={key++} className="h-2" />)
@@ -78,6 +82,17 @@ function renderContent(text: string) {
     if (trimmed === '★') {
       elements.push(
         <div key={key++} className="text-center text-gray-300 dark:text-gray-600 my-4 text-sm tracking-widest">★</div>
+      )
+      continue
+    }
+
+    // 【前言】 — small italic preface, centered, before image
+    const prefaceMatch = trimmed.match(PREFACE_RE)
+    if (prefaceMatch) {
+      elements.push(
+        <p key={key++} className="font-serif italic text-gray-500 dark:text-gray-400 text-sm leading-loose text-center mb-6" style={{ textIndent: 0 }}>
+          {prefaceMatch[1]}
+        </p>
       )
       continue
     }
@@ -130,24 +145,51 @@ function renderContent(text: string) {
       continue
     }
 
-    // 《poem title》 — centered amber, auto-detected
+    // 《poem title》 — centered amber, larger font, shifted slightly left
     if (POEM_TITLE_RE.test(trimmed)) {
       elements.push(
-        <p key={key++} className="text-center font-serif text-sm text-accent dark:text-amber-400 tracking-wide mt-8 mb-1" style={{ textIndent: 0 }}>
+        <p key={key++} className="text-center font-serif text-lg text-accent dark:text-amber-400 tracking-wide mt-8 mb-2" style={{ textIndent: 0, paddingRight: '2em' }}>
           {trimmed}
         </p>
       )
       continue
     }
 
-    // 「ci stanza」 — block centered, lines left-aligned, italic (词)
-    const ciMatch = trimmed.match(CI_STANZA_RE)
-    if (ciMatch) {
-      const stanzaLines = ciMatch[1].split('／')
+    // 「ci stanza」 — collect ALL consecutive stanzas into one block so they
+    // share the same left edge (fixes 上阕/下阕 alignment)
+    if (CI_STANZA_RE.test(trimmed)) {
+      const allStanzas: string[][] = []
+      // collect this stanza and any that follow (separated by blank lines only)
+      let j = i - 1
+      while (j < lines.length) {
+        const t = lines[j].trim()
+        const m = t.match(CI_STANZA_RE)
+        if (m) {
+          allStanzas.push(m[1].split('／'))
+          j++
+        } else if (!t) {
+          // blank line — peek further
+          let k = j + 1
+          while (k < lines.length && !lines[k].trim()) k++
+          if (k < lines.length && CI_STANZA_RE.test(lines[k].trim())) {
+            j = k // skip blanks, continue collecting
+          } else {
+            break // next non-blank is not a stanza
+          }
+        } else {
+          break
+        }
+      }
+      i = j // advance main loop
       elements.push(
-        <div key={key++} className="flex justify-center my-3" style={{ textIndent: 0 }}>
+        <div key={key++} className="flex justify-center my-4" style={{ textIndent: 0 }}>
           <div className="font-serif italic text-gray-600 dark:text-gray-400 tracking-wide text-left leading-relaxed">
-            {stanzaLines.map((l, i) => <div key={i}>{l}</div>)}
+            {allStanzas.map((stanza, si) => (
+              <div key={si}>
+                {si > 0 && <div className="h-3" />}
+                {stanza.map((l, li) => <div key={li}>{l}</div>)}
+              </div>
+            ))}
           </div>
         </div>
       )
