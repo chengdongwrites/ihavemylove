@@ -12,10 +12,10 @@ const jiayuanLive = new Map(jiayuanEssays.map((e) => [e.title, `/luzexi/jiayuan/
 
 export const metadata = {
   title: '芦泽溪散文集',
-  description: '洛城东散文集——七十二篇，五个篇章，留给愿意一起聆听的人',
+  description: '芦苇听风，溪水听石，洛城东听时间——把听见的写下来，留给愿意一起聆听的人。',
   openGraph: {
     title: '芦泽溪散文集',
-    description: '洛城东散文集——七十二篇，五个篇章，留给愿意一起聆听的人',
+    description: '芦苇听风，溪水听石，洛城东听时间——把听见的写下来，留给愿意一起聆听的人。',
     siteName: '我有所爱',
   },
 }
