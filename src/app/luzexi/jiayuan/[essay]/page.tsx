@@ -39,7 +39,14 @@ export async function generateMetadata({ params }: { params: { essay: string } }
       title: `${essay.title} · 家园篇`,
       description,
       siteName: '我有所爱',
-      ...(essay.image && { images: [`/images/${essay.image}`] }),
+      ...(essay.image && {
+        images: [{
+          url: `/images/${essay.image}`,
+          width: essay.imageWidth ?? 800,
+          height: essay.imageHeight ?? 600,
+          alt: essay.title,
+        }],
+      }),
     },
   }
 }

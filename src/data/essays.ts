@@ -6,6 +6,8 @@ export interface Essay {
   section: string;
   image?: string;
   imageCaption?: string;
+  imageWidth?: number;
+  imageHeight?: number;
   content: string;
 }
 
@@ -2820,6 +2822,8 @@ export const jiayuanEssays: Essay[] = [
     section: "家园篇",
     image: "jiayuan-luzexi-jing.png",
     imageCaption: 'ChatGPT-4o所作\u201c芦泽溪径\u201d诗意配图',
+    imageWidth: 881,
+    imageHeight: 539,
     content: `【前言】每年冬末春初，我都会行走在这条静默的溪径之上。它不为人知，却藏着春天最初的秘密。这一次，我带来几首诗词和一段心境，与你共听溪水初醒的声音。
 
 【图:jiayuan-luzexi-jing.png:ChatGPT-4o所作"芦泽溪径"诗意配图】
@@ -2921,6 +2925,8 @@ export const jiayuanEssays: Essay[] = [
     section: "家园篇",
     image: "jiayuan-changjingshu.jpg",
     imageCaption: "",
+    imageWidth: 662,
+    imageHeight: 792,
     content: `【一】
 
 过了冬至和圣诞，该迎接新年了。但谁又有心情欢度元旦呢！
@@ -3015,6 +3021,8 @@ export const jiayuanEssays: Essay[] = [
     section: "家园篇",
     image: "jiayuan-shuofang-xue.png",
     imageCaption: "",
+    imageWidth: 679,
+    imageHeight: 371,
     content: `别辜负了这片大好的雪，到谷溪那边去吧。
 
 雪枝覆盖的南山，是水墨写意，在溪的岸边便可瞭望。一边，听着咽咽的水声。一边，看连绵起伏的青墨，那是寒冬中寡淡的山魂，点缀着连天的飞白，而飞白是雨水的精灵。
