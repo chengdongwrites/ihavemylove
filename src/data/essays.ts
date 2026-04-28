@@ -2919,7 +2919,7 @@ export const jiayuanEssays: Essay[] = [
     title: "常青树礼赞",
     subtitle: "",
     section: "家园篇",
-    image: "",
+    image: "jiayuan-changjingshu.jpg",
     imageCaption: "",
     content: `【一】
 
@@ -3013,7 +3013,7 @@ export const jiayuanEssays: Essay[] = [
     title: "朔方的雪",
     subtitle: "",
     section: "家园篇",
-    image: "",
+    image: "jiayuan-shuofang-xue.png",
     imageCaption: "",
     content: `别辜负了这片大好的雪，到谷溪那边去吧。
 
