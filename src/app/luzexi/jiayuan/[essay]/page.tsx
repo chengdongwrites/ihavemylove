@@ -56,6 +56,8 @@ const VERSE_RE = /^『(.+)』$/
 const SECTION_TITLE_RE = /^【(.+)】$/
 // 【图:filename:caption】
 const INLINE_IMG_RE = /^【图:([^:]+):(.*)】$/
+// 【发表:url:text】 — right-aligned linked publication note
+const PUBLISH_RE = /^【发表:([^:]+):(.+)】$/
 
 function renderContent(text: string) {
   const lines = text.split('\n')
@@ -128,6 +130,20 @@ function renderContent(text: string) {
       elements.push(
         <p key={key++} className="font-serif font-bold text-ink dark:text-gray-300 mt-10 mb-2" style={{ textIndent: 0 }}>
           注
+        </p>
+      )
+      continue
+    }
+
+    // 【发表:url:text】 — right-aligned linked publication note
+    const publishMatch = trimmed.match(PUBLISH_RE)
+    if (publishMatch) {
+      const [, url, text] = publishMatch
+      elements.push(
+        <p key={key++} className="text-right font-sans text-xs text-gray-400 dark:text-gray-500 mt-4 mb-2" style={{ textIndent: 0 }}>
+          <a href={url} target="_blank" rel="noopener noreferrer" className="hover:text-accent dark:hover:text-amber-400 transition-colors underline underline-offset-2">
+            {text}
+          </a>
         </p>
       )
       continue
