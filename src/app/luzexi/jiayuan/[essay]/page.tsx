@@ -56,8 +56,8 @@ const VERSE_RE = /^『(.+)』$/
 const SECTION_TITLE_RE = /^【(.+)】$/
 // 【图:filename:caption】
 const INLINE_IMG_RE = /^【图:([^:]+):(.*)】$/
-// 【发表:url:text】 — right-aligned linked publication note
-const PUBLISH_RE = /^【发表:([^:]+):(.+)】$/
+// 【发表|url|text】 — right-aligned linked publication note
+const PUBLISH_RE = /^【发表\|([^|]+)\|(.+)】$/
 
 function renderContent(text: string) {
   const lines = text.split('\n')
