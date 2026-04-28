@@ -139,10 +139,13 @@ function renderContent(text: string) {
     const publishMatch = trimmed.match(PUBLISH_RE)
     if (publishMatch) {
       const [, url, text] = publishMatch
+      const parts = text.split('／')
       elements.push(
         <p key={key++} className="text-right font-sans text-xs text-gray-400 dark:text-gray-500 mt-4 mb-2" style={{ textIndent: 0 }}>
           <a href={url} target="_blank" rel="noopener noreferrer" className="hover:text-accent dark:hover:text-amber-400 transition-colors underline underline-offset-2">
-            {text}
+            {parts.map((part, i) => (
+              <span key={i}>{part}{i < parts.length - 1 && <br />}</span>
+            ))}
           </a>
         </p>
       )

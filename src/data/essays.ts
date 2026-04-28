@@ -3045,6 +3045,6 @@ export const jiayuanEssays: Essay[] = [
 
 【图:jiayuan-shuofang-xue.png:陈颍水墨画】
 
-【发表|https://mp.weixin.qq.com/s/JsSRdVJlesPigdYV4_o6NA|本文首发于"人文科大"公众号，2022年12月20日，配陈颍的水墨画和朗诵。】`,
+【发表|https://mp.weixin.qq.com/s/JsSRdVJlesPigdYV4_o6NA|本文首发于"人文科大"公众号，2022年12月20日，／配陈颍的水墨画和朗诵。】`,
   },
 ]
