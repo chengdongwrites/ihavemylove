@@ -178,6 +178,17 @@ function renderContent(
       continue
     }
 
+    // 【引】 — block quote: italic, left-aligned, no text-indent
+    if (trimmed.startsWith('【引】')) {
+      const quoteText = trimmed.slice(3)
+      elements.push(
+        <p key={key++} className="italic leading-loose text-gray-700 dark:text-gray-300 my-5 pl-5 border-l-2 border-amber-300/60 dark:border-amber-700/50" style={{ textIndent: 0 }}>
+          {renderWithSup(quoteText)}
+        </p>
+      )
+      continue
+    }
+
     // 【注】 — left-aligned note header; subsequent paragraphs render small
     if (trimmed === '【注】') {
       inNote = true
@@ -200,27 +211,33 @@ function renderContent(
       continue
     }
 
-    // 『quoted verse』 — centered italic block, supports ／ line separator
+    // 『quoted verse』 — centered block, left-aligned text inside, italic
     const verseMatch = trimmed.match(VERSE_BLOCK_RE)
     if (verseMatch) {
       const verseLines = verseMatch[1].split('／')
       elements.push(
-        <div key={key++} className="text-center font-serif italic text-gray-600 dark:text-gray-400 tracking-wide my-6" style={{ textIndent: 0 }}>
-          {verseLines.map((l, i) => <div key={i}>{renderWithSup(l)}</div>)}
+        <div key={key++} className="flex justify-center my-6" style={{ textIndent: 0 }}>
+          <div className="font-serif italic text-gray-600 dark:text-gray-400 tracking-wide text-left">
+            {verseLines.map((l, i) => <div key={i}>{renderWithSup(l)}</div>)}
+          </div>
         </div>
       )
       continue
     }
 
-    // 「poem block」 — centered (not italic) if ／ present; else no-indent single line
+    // 「poem block」 — narrow centered prose block if ／ present; else no-indent single line
     const poemMatch = trimmed.match(POEM_LINE_RE)
     if (poemMatch) {
       const content = poemMatch[1]
       const poemLines = content.split('／')
       if (poemLines.length > 1) {
         elements.push(
-          <div key={key++} className="text-center font-serif text-ink dark:text-gray-200 tracking-wide my-6" style={{ textIndent: 0 }}>
-            {poemLines.map((l, i) => <div key={i}>{l}</div>)}
+          <div key={key++} className="my-8 px-8 sm:px-16" style={{ textIndent: 0 }}>
+            <p className="font-serif text-ink dark:text-gray-200 tracking-wide leading-loose text-center">
+              {poemLines.map((l, i) => (
+                <span key={i}>{l}{i < poemLines.length - 1 && <br />}</span>
+              ))}
+            </p>
           </div>
         )
       } else {
