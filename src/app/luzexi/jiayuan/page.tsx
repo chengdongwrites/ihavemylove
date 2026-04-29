@@ -6,6 +6,7 @@ import ViewCounter from '@/components/ViewCounter'
 import { jiayuanEssays } from '@/data/essays'
 
 const liveArticles = new Map(jiayuanEssays.map((e) => [e.title, e.slug]))
+const longArticles = new Set(['亲近广玉兰', '迂回路口'])
 
 export const metadata = {
   title: '家园篇 · 芦泽溪散文集',
@@ -86,6 +87,9 @@ export default function JiayuanPage() {
                     </Link>
                   ) : (
                     <span>{article}</span>
+                  )}
+                  {longArticles.has(article) && (
+                    <span className="ml-1 font-sans text-[10px] text-gray-400 dark:text-gray-500 tracking-wide align-middle">长篇</span>
                   )}
                   {idx < articles.length - 1 && (
                     <span className="mx-1 text-gray-400 dark:text-gray-500 text-base">·</span>

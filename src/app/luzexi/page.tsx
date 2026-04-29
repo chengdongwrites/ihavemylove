@@ -7,7 +7,7 @@ import ViewCounter from '@/components/ViewCounter'
 import { cunzaiEssays, bianqianEssays, jiayuanEssays } from '@/data/essays'
 
 const cunzaiLive = new Map(cunzaiEssays.map((e) => [e.title, `/luzexi/cunzai/${e.slug}`]))
-const longArticleTitles = new Set(['人间有美赛珍珠', '磨难中的天才——苏东坡'])
+const longArticleTitles = new Set(['那时红叶', '人间有美赛珍珠', '亲近广玉兰', '迂回路口'])
 const bianqianLive = new Map(bianqianEssays.map((e) => [e.title, `/luzexi/bianqian/${e.slug}`]))
 const jiayuanLive = new Map(jiayuanEssays.map((e) => [e.title, `/luzexi/jiayuan/${e.slug}`]))
 
