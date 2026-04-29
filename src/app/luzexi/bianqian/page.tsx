@@ -6,6 +6,7 @@ import ViewCounter from '@/components/ViewCounter'
 import { bianqianEssays } from '@/data/essays'
 
 const liveArticles = new Map(bianqianEssays.map((e) => [e.title, e.slug]))
+const longArticles = new Set(['四月天，人间有美赛珍珠', '磨难中的天才——苏东坡'])
 
 export const metadata = {
   title: '变迁篇 · 芦泽溪散文集',
@@ -85,6 +86,9 @@ export default function BianqianPage() {
                     </Link>
                   ) : (
                     <span>{article}</span>
+                  )}
+                  {longArticles.has(article) && (
+                    <span className="ml-1 font-sans text-[10px] text-gray-400 dark:text-gray-500 tracking-wide align-middle">长篇</span>
                   )}
                   {idx < articles.length - 1 && (
                     <span className="mx-1 text-gray-400 dark:text-gray-500 text-base">·</span>

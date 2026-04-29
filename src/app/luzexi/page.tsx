@@ -7,6 +7,7 @@ import ViewCounter from '@/components/ViewCounter'
 import { cunzaiEssays, bianqianEssays, jiayuanEssays } from '@/data/essays'
 
 const cunzaiLive = new Map(cunzaiEssays.map((e) => [e.title, `/luzexi/cunzai/${e.slug}`]))
+const longArticleTitles = new Set(['四月天，人间有美赛珍珠', '磨难中的天才——苏东坡'])
 const bianqianLive = new Map(bianqianEssays.map((e) => [e.title, `/luzexi/bianqian/${e.slug}`]))
 const jiayuanLive = new Map(jiayuanEssays.map((e) => [e.title, `/luzexi/jiayuan/${e.slug}`]))
 
@@ -187,6 +188,9 @@ export default function LuzexiPage() {
                           </Link>
                         ) : (
                           <span>{title}</span>
+                        )}
+                        {longArticleTitles.has(title) && (
+                          <span className="ml-1 font-sans text-[10px] text-gray-400 dark:text-gray-500 tracking-wide align-middle">长篇</span>
                         )}
                         {!isLast && <span className="mx-1 text-gray-400 dark:text-gray-500 text-base">·</span>}
                       </span>
