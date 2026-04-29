@@ -38,13 +38,24 @@ export async function generateMetadata({ params }: { params: { essay: string } }
       title: `${essay.title} · 变迁篇`,
       description,
       siteName: '我有所爱',
-      ...(essay.image && { images: [`/images/${essay.image}`] }),
+      ...(essay.image && {
+        images: [{
+          url: `/images/${essay.image}`,
+          width: essay.imageWidth ?? 800,
+          height: essay.imageHeight ?? 600,
+          alt: essay.title,
+        }],
+      }),
     },
   }
 }
 
 // Matches 【section title】 markers
 const SECTION_TITLE_RE = /^【(.+)】$/
+// 【图:filename:caption】 — inline image with caption
+const INLINE_IMG_RE = /^【图:([^:]+):(.*)】$/
+// 【发表|url|text】 — centered linked publication note
+const PUBLISH_RE = /^【发表\|([^|]+)\|(.+)】$/
 // 「poem block」 — use ／ as separator; multi-line renders centered, single renders no-indent
 const POEM_LINE_RE = /^「(.+)」$/
 // 『quoted verse』 — centered, italic (for epigraph ci/poems)
@@ -100,6 +111,48 @@ function renderContent(
             </figcaption>
           )}
         </figure>
+      )
+      continue
+    }
+
+    // 【图:filename:caption】 — inline image
+    const imgMatch = trimmed.match(INLINE_IMG_RE)
+    if (imgMatch) {
+      const [, filename, caption] = imgMatch
+      elements.push(
+        <figure key={key++} className="my-10 text-center">
+          <div className="inline-block max-w-lg w-full mx-auto">
+            <Image
+              src={`/images/${filename}`}
+              alt={caption || ''}
+              width={881}
+              height={539}
+              className="w-full h-auto rounded shadow-md"
+            />
+          </div>
+          {caption && (
+            <figcaption className="font-sans text-xs text-gray-400 dark:text-gray-500 mt-3 leading-relaxed max-w-md mx-auto">
+              {caption}
+            </figcaption>
+          )}
+        </figure>
+      )
+      continue
+    }
+
+    // 【发表|url|text】 — centered linked publication note
+    const publishMatch = trimmed.match(PUBLISH_RE)
+    if (publishMatch) {
+      const [, url, text] = publishMatch
+      const parts = text.split('／')
+      elements.push(
+        <p key={key++} className="text-center font-sans text-xs text-gray-400 dark:text-gray-500 mt-4 mb-2" style={{ textIndent: 0 }}>
+          <a href={url} target="_blank" rel="noopener noreferrer" className="hover:text-accent dark:hover:text-amber-400 transition-colors underline underline-offset-2">
+            {parts.map((part, i) => (
+              <span key={i}>{part}{i < parts.length - 1 && <br />}</span>
+            ))}
+          </a>
+        </p>
       )
       continue
     }
