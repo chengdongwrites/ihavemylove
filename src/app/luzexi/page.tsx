@@ -7,7 +7,7 @@ import ViewCounter from '@/components/ViewCounter'
 import { cunzaiEssays, bianqianEssays, jiayuanEssays } from '@/data/essays'
 
 const cunzaiLive = new Map(cunzaiEssays.map((e) => [e.title, `/luzexi/cunzai/${e.slug}`]))
-const longArticleTitles = new Set(['四月天，人间有美赛珍珠', '磨难中的天才——苏东坡'])
+const longArticleTitles = new Set(['人间有美赛珍珠', '磨难中的天才——苏东坡'])
 const bianqianLive = new Map(bianqianEssays.map((e) => [e.title, `/luzexi/bianqian/${e.slug}`]))
 const jiayuanLive = new Map(jiayuanEssays.map((e) => [e.title, `/luzexi/jiayuan/${e.slug}`]))
 
@@ -41,7 +41,7 @@ const sections = [
     href: '/luzexi/bianqian',
     articles: [
       '雨山前', '告别童年', '以女儿的名义', '闲话变异与变迁',
-      '那时红叶', '四月天，人间有美赛珍珠', '千屈菜', '又见南山绿',
+      '那时红叶', '人间有美赛珍珠', '千屈菜', '又见南山绿',
       '时闻折竹声', '无依之地忍冬花', '磨难中的天才——苏东坡',
       '孤山独秀', '棠梨——遥远的记忆', '棠梨牵出12800公里连线', '严寒的逻辑',
       '静默生死哀思——哈姆奈特观感',

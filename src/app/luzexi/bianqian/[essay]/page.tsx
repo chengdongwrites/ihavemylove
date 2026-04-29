@@ -61,17 +61,18 @@ const POEM_LINE_RE = /^「(.+)」$/
 // 『quoted verse』 — centered, italic (for epigraph ci/poems)
 const VERSE_BLOCK_RE = /^『(.+)』$/
 
-// Render inline superscripts: ^1^ → <sup>1</sup>
+// Render inline markup: ^1^ → <sup>1</sup>  and  【链:url|text】 → <a>
 function renderWithSup(text: string): React.ReactNode {
-  const parts = text.split(/(\^\d+\^)/)
+  const parts = text.split(/(【链:[^|】]+\|[^】]+】|\^\d+\^)/)
   if (parts.length === 1) return text
   return (
     <>
       {parts.map((p, i) => {
-        const m = p.match(/^\^(\d+)\^$/)
-        return m
-          ? <sup key={i} className="text-[10px] font-sans text-gray-400 dark:text-gray-500 align-super">{m[1]}</sup>
-          : <span key={i}>{p}</span>
+        const sup = p.match(/^\^(\d+)\^$/)
+        if (sup) return <sup key={i} className="text-[10px] font-sans text-gray-400 dark:text-gray-500 align-super">{sup[1]}</sup>
+        const link = p.match(/^【链:([^|】]+)\|([^】]+)】$/)
+        if (link) return <a key={i} href={link[1]} target="_blank" rel="noopener noreferrer" className="nav-link underline underline-offset-2">{link[2]}</a>
+        return <span key={i}>{p}</span>
       })}
     </>
   )
