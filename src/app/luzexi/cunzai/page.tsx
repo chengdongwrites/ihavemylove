@@ -7,6 +7,7 @@ import { cunzaiEssays } from '@/data/essays'
 
 // Articles that are live (have individual pages)
 const liveArticles = new Map(cunzaiEssays.map((e) => [e.title, e.slug]))
+const longArticles = new Set(['静默之言说'])
 
 export const metadata = {
   title: '存在篇 · 芦泽溪散文集',
@@ -88,6 +89,9 @@ export default function CunzaiPage() {
                     </Link>
                   ) : (
                     <span>{article}</span>
+                  )}
+                  {longArticles.has(article) && (
+                    <span className="ml-1 font-sans text-[10px] text-gray-400 dark:text-gray-500 tracking-wide align-middle">长篇</span>
                   )}
                   {idx < articles.length - 1 && (
                     <span className="mx-1 text-gray-400 dark:text-gray-500 text-base">·</span>
