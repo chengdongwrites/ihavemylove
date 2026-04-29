@@ -52,14 +52,30 @@ export async function generateMetadata({ params }: { params: { essay: string } }
 
 // Matches 【section title】 markers
 const SECTION_TITLE_RE = /^【(.+)】$/
-// 【图:filename:caption】 — inline image with caption
-const INLINE_IMG_RE = /^【图:([^:]+):(.*)】$/
+// 【图:filename:caption】 or 【图:filename:caption:sm】 — inline image with optional size
+const INLINE_IMG_RE = /^【图:([^:]+):([^:】]*)(?::([^】]*))?】$/
 // 【发表|url|text】 — centered linked publication note
 const PUBLISH_RE = /^【发表\|([^|]+)\|(.+)】$/
 // 「poem block」 — use ／ as separator; multi-line renders centered, single renders no-indent
 const POEM_LINE_RE = /^「(.+)」$/
 // 『quoted verse』 — centered, italic (for epigraph ci/poems)
 const VERSE_BLOCK_RE = /^『(.+)』$/
+
+// Render inline superscripts: ^1^ → <sup>1</sup>
+function renderWithSup(text: string): React.ReactNode {
+  const parts = text.split(/(\^\d+\^)/)
+  if (parts.length === 1) return text
+  return (
+    <>
+      {parts.map((p, i) => {
+        const m = p.match(/^\^(\d+)\^$/)
+        return m
+          ? <sup key={i} className="text-[10px] font-sans text-gray-400 dark:text-gray-500 align-super">{m[1]}</sup>
+          : <span key={i}>{p}</span>
+      })}
+    </>
+  )
+}
 
 function renderContent(
   text: string,
@@ -115,13 +131,18 @@ function renderContent(
       continue
     }
 
-    // 【图:filename:caption】 — inline image
+    // 【图:filename:caption】 or 【图:filename:caption:sm】 — inline image
     const imgMatch = trimmed.match(INLINE_IMG_RE)
     if (imgMatch) {
-      const [, filename, caption] = imgMatch
+      const [, filename, caption, size] = imgMatch
+      const containerClass = size === 'sm'
+        ? 'inline-block max-w-[200px] w-full mx-auto'
+        : size === 'md'
+        ? 'inline-block max-w-sm w-full mx-auto'
+        : 'inline-block max-w-lg w-full mx-auto'
       elements.push(
         <figure key={key++} className="my-10 text-center">
-          <div className="inline-block max-w-lg w-full mx-auto">
+          <div className={containerClass}>
             <Image
               src={`/images/${filename}`}
               alt={caption || ''}
@@ -185,7 +206,7 @@ function renderContent(
       const verseLines = verseMatch[1].split('／')
       elements.push(
         <div key={key++} className="text-center font-serif italic text-gray-600 dark:text-gray-400 tracking-wide my-6" style={{ textIndent: 0 }}>
-          {verseLines.map((l, i) => <div key={i}>{l}</div>)}
+          {verseLines.map((l, i) => <div key={i}>{renderWithSup(l)}</div>)}
         </div>
       )
       continue
@@ -229,7 +250,7 @@ function renderContent(
     if (inNote) {
       elements.push(
         <p key={key++} className="text-sm text-gray-500 dark:text-gray-400 mb-2 leading-relaxed" style={{ textIndent: 0 }}>
-          {trimmed}
+          {renderWithSup(trimmed)}
         </p>
       )
       continue
@@ -237,7 +258,7 @@ function renderContent(
 
     elements.push(
       <p key={key++} className="mb-5" style={{ textIndent: '2em' }}>
-        {trimmed}
+        {renderWithSup(trimmed)}
       </p>
     )
   }
