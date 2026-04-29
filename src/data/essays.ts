@@ -3062,7 +3062,7 @@ export const jiayuanEssays: Essay[] = [
     subtitle: "",
     section: "变迁篇",
     image: "bianqian-syzj-05.jpg",
-    imageCaption: "作者所摄"绿山农庄"主建筑",
+    imageCaption: '作者所摄"绿山农庄"主建筑',
     imageWidth: 2016,
     imageHeight: 1512,
     content: `『"自十三世纪马可波罗以来，赛珍珠是最具影响力的、描写中国的西方人士"／— 历史学家James Thomson，1992』
