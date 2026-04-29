@@ -3200,7 +3200,7 @@ export const bianqianEssays: Essay[] = [
 
 【注】
 
-1. Hilary Spurling, "Pearl Buck in China: Journey to the good earth", 2010, Simon & Schuster, New York.
+1. 本文的主要参考资料来自传记作家Hilary Spurling所写的这本书。Hilary Spurling, "Pearl Buck in China: Journey to the good earth", 2010, Simon & Schuster, New York.
 
 2. James Thomson, "Why Doesn't Pearl Buck Get Respect?" Philadelphia Inquirer, July 24, 1992, p. A15.
 
