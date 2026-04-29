@@ -213,13 +213,19 @@ function renderContent(
     }
 
     // 『quoted verse』 — centered block, left-aligned text inside, italic
+    // ／　／ (with ideographic space) renders as a blank spacer between stanzas
     const verseMatch = trimmed.match(VERSE_BLOCK_RE)
     if (verseMatch) {
       const verseLines = verseMatch[1].split('／')
       elements.push(
         <div key={key++} className="flex justify-center my-6" style={{ textIndent: 0 }}>
           <div className="font-serif italic text-gray-600 dark:text-gray-400 tracking-wide text-left">
-            {verseLines.map((l, i) => <div key={i}>{renderWithSup(l)}</div>)}
+            {verseLines.map((l, i) => {
+              const line = l.trim()
+              return line
+                ? <div key={i}>{renderWithSup(line)}</div>
+                : <div key={i} className="h-4" />
+            })}
           </div>
         </div>
       )
@@ -241,6 +247,15 @@ function renderContent(
             </p>
           </div>
         )
+      } else if (content.length > 40) {
+        // Long classical/prose passage — centered narrow italic block, text left-aligned
+        elements.push(
+          <div key={key++} className="my-8 px-6 sm:px-14" style={{ textIndent: 0 }}>
+            <p className="font-serif italic text-ink dark:text-gray-200 tracking-wide leading-loose">
+              {renderWithSup(content)}
+            </p>
+          </div>
+        )
       } else {
         elements.push(
           <p key={key++} className="font-serif italic text-ink dark:text-gray-200 tracking-wide mb-1" style={{ textIndent: 0 }}>
@@ -248,6 +263,16 @@ function renderContent(
           </p>
         )
       }
+      continue
+    }
+
+    // （注：...） — inline note, left-aligned small text (must come before date check)
+    if (trimmed.startsWith('（注：') && trimmed.endsWith('）')) {
+      elements.push(
+        <p key={key++} className="text-sm text-gray-500 dark:text-gray-400 my-4 leading-relaxed" style={{ textIndent: 0 }}>
+          {renderWithSup(trimmed)}
+        </p>
+      )
       continue
     }
 
@@ -333,7 +358,7 @@ export default function BianqianEssayPage({ params }: { params: { essay: string 
             变迁篇
           </p>
           <h1 className="chapter-title text-2xl sm:text-3xl text-ink dark:text-gray-100 tracking-widest mb-3">
-            {essay.title}
+            {essay.title}{essay.titleSup && <sup className="text-sm font-sans text-gray-400 dark:text-gray-500 ml-0.5">{essay.titleSup}</sup>}
           </h1>
           {essay.subtitle && (
             <p className="font-serif text-base text-accent dark:text-amber-400 tracking-wide">

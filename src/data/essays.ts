@@ -8,6 +8,7 @@ export interface Essay {
   imageCaption?: string;
   imageWidth?: number;
   imageHeight?: number;
+  titleSup?: number;
   content: string;
 }
 
@@ -2822,6 +2823,7 @@ export const bianqianEssays: Essay[] = [
     imageCaption: '作者所摄"绿山农庄"主建筑',
     imageWidth: 2016,
     imageHeight: 1512,
+    titleSup: 1,
     content: `『"自十三世纪马可波罗以来，赛珍珠是最具影响力的、描写中国的西方人士"／— 历史学家James Thomson，1992^2^』
 
 【一、青贮塔】
@@ -3068,9 +3070,7 @@ export const bianqianEssays: Essay[] = [
 
 有人说，林徽因1934年4月发表在《学文》上的诗歌"你是人间的四月天"是为悼念徐志摩而作，也有人认为她是为儿子的出生而作：
 
-『雪化后那片鹅黄，你像；新鲜／初放芽的绿，你是；柔嫩喜悦／水光浮动着你梦期待中白莲』
-
-『你是一树一树的花开，是燕／在梁间呢喃，——你是爱，是暖，／是希望，你是人间的四月天』
+『……／雪化后那片鹅黄，你像；新鲜／初放芽的绿，你是；柔嫩喜悦／水光浮动着你梦期待中白莲／　／你是一树一树的花开，是燕／在梁间呢喃，——你是爱，是暖，／是希望，你是人间的四月天』
 
 四月，水仙花处处盛开时，玉兰花也一树一树地盛开。早樱瞬间而来、瞬息而去，满园的风信子、郁金香，和晚樱一道也将如期而至。这是诱人的百花齐放的四月天。
 
@@ -3160,7 +3160,7 @@ export const bianqianEssays: Essay[] = [
 
 参观中，我最喜欢的是她的办公室：办公桌前面墙上挂着一幅吴道子画的高大的孔子像（应该是复制品），孔子像下方一个有太极阴阳图的木厨上摆着几个石膏人头像，是她自己为几位收养孩子做的；左边窗户上一幅正楷书法写的是孔子的"礼运大同篇"：
 
-「大道之行也，天下为公。选贤与能，讲信修睦，／故人不独亲其亲，不独子其子，使老有所终，壮有所用，幼有所长，／鳏寡孤独废疾者皆有所养，男有分，女有归。／货恶其弃于地也，不必藏于己；力恶其不出于身也，不必为己。／是故谋闭而不兴，盗窃乱贼而不作，故外户而不闭，是谓大同。」
+「大道之行也，天下为公。选贤与能，讲信修睦，故人不独亲其亲，不独子其子，使老有所终，壮有所用，幼有所长，鳏寡孤独废疾者皆有所养，男有分，女有归。货恶其弃于地也，不必藏于己；力恶其不出于身也，不必为己。是故谋闭而不兴，盗窃乱贼而不作，故外户而不闭，是谓大同。」
 
 左面地上还有一尊观音像。这是个崇尚儒、释、道的书房。而从她收养小孩，建立国际收养机构等行为来看，她在实践着孔子教导的人生理想。
 
@@ -3200,7 +3200,7 @@ export const bianqianEssays: Essay[] = [
 
 【注】
 
-1. Hilary Spurling, "Pearl Buck in China: Journey to the Good Earth", 2010, Simon & Schuster, New York.
+1. Hilary Spurling, "Pearl Buck in China: Journey to the good earth", 2010, Simon & Schuster, New York.
 
 2. James Thomson, "Why Doesn't Pearl Buck Get Respect?" Philadelphia Inquirer, July 24, 1992, p. A15.
 
