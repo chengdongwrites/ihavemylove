@@ -35,9 +35,12 @@ export default function SubscribeForm() {
   }
 
   return (
-    <div className="mt-6 pt-6 border-t border-amber-200/30 dark:border-gray-800/50">
-      <p className="font-sans text-xs text-gray-400 dark:text-gray-500 tracking-wide mb-3">
+    <div className="mt-10 mb-2 pt-8 border-t border-amber-200/40 dark:border-gray-800/60">
+      <p className="font-sans text-sm text-gray-500 dark:text-gray-400 tracking-wide mb-1">
         订阅新文章通知
+      </p>
+      <p className="font-sans text-xs text-gray-400 dark:text-gray-500 mb-4">
+        订阅后每当有新文章上线，您会收到邮件通知（与留言独立）
       </p>
 
       {status === 'ok' && (

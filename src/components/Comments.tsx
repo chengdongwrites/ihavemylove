@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import SubscribeForm from './SubscribeForm'
 
 const PAGE_SIZE = 10
 
@@ -123,6 +124,8 @@ export default function Comments({ page }: { page: string }) {
           暂无留言，来写第一条吧。
         </p>
       )}
+
+      <SubscribeForm />
 
       {/* Comment form */}
       {status === 'done' ? (
