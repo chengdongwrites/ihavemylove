@@ -40,12 +40,17 @@ export async function POST(req: NextRequest) {
   if (error) return NextResponse.json({ error: error.message }, { status: 500 })
 
   // Send welcome email
-  await resend.emails.send({
+  const emailResult = await resend.emails.send({
     from: FROM,
     to: normalised,
     subject: '欢迎订阅 · 芦泽溪散文集',
     html: welcomeHtml(row.token),
   })
+
+  if (emailResult.error) {
+    console.error('Resend error:', emailResult.error)
+    return NextResponse.json({ ok: true, emailError: emailResult.error.message })
+  }
 
   return NextResponse.json({ ok: true })
 }
