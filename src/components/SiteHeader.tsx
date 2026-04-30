@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import ThemeToggle from './ThemeToggle'
+import SubscribeButton from './SubscribeButton'
 
 export default function SiteHeader() {
   return (
@@ -13,6 +14,7 @@ export default function SiteHeader() {
           <Link href="/luzexi" className="nav-link tracking-wide">散文</Link>
           <Link href="/shici" className="nav-link tracking-wide">诗词</Link>
           <Link href="/about" className="nav-link tracking-wide">作者</Link>
+          <SubscribeButton />
           <ThemeToggle />
         </nav>
       </div>
