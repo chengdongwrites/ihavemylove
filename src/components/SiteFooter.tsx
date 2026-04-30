@@ -1,3 +1,5 @@
+import SubscribeForm from './SubscribeForm'
+
 export default function SiteFooter() {
   return (
     <footer className="border-t border-amber-200/40 dark:border-gray-800/60 mt-16 py-10">
@@ -11,6 +13,7 @@ export default function SiteFooter() {
         <p className="font-sans text-xs text-gray-300 dark:text-gray-700 tracking-wide">
           © 洛城东 · All rights reserved · 版权为作者所有 · 转载请联系 chengdongwrites@gmail.com
         </p>
+        <SubscribeForm />
       </div>
     </footer>
   )
