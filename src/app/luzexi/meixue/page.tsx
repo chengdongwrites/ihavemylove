@@ -17,7 +17,7 @@ export const metadata = {
   },
 }
 
-const longArticles = new Set(['相见牡丹时', '生活美学——林语堂', '从农夫与诗人困境到生活美定理', '渐行渐远渐无人'])
+const longArticles = new Set(['相见牡丹时', '生活美学——林语堂', '从农夫与诗人困境到生活美定理'])
 
 const articles = [
   '相见牡丹时', '银杏叶画的窥视美感', '生活美学——林语堂',
