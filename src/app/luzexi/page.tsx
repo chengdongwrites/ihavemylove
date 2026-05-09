@@ -4,12 +4,13 @@ import SiteHeader from '@/components/SiteHeader'
 import SiteFooter from '@/components/SiteFooter'
 import Comments from '@/components/Comments'
 import ViewCounter from '@/components/ViewCounter'
-import { cunzaiEssays, bianqianEssays, jiayuanEssays } from '@/data/essays'
+import { cunzaiEssays, bianqianEssays, jiayuanEssays, meixueEssays } from '@/data/essays'
 
 const cunzaiLive = new Map(cunzaiEssays.map((e) => [e.title, `/luzexi/cunzai/${e.slug}`]))
-const longArticleTitles = new Set(['那时红叶', '人间有美赛珍珠', '亲近广玉兰', '迂回路口', '相见牡丹时', '生活美学——林语堂', '从农夫与诗人困境到生活美定理', '静默之言说'])
+const longArticleTitles = new Set(['那时红叶', '人间有美赛珍珠', '亲近广玉兰', '迂回路口', '相见牡丹时', '生活美学——林语堂', '从农夫与诗人困境到生活美定理', '静默之言说', '渐行渐远渐无人'])
 const bianqianLive = new Map(bianqianEssays.map((e) => [e.title, `/luzexi/bianqian/${e.slug}`]))
 const jiayuanLive = new Map(jiayuanEssays.map((e) => [e.title, `/luzexi/jiayuan/${e.slug}`]))
+const meixueLive = new Map(meixueEssays.map((e) => [e.title, `/luzexi/meixue/${e.slug}`]))
 
 export const metadata = {
   title: '芦泽溪散文集',
@@ -175,7 +176,8 @@ export default function LuzexiPage() {
                     const cunzaiHref = section.name === '存在篇' ? cunzaiLive.get(title) : null
                     const bianqianHref = section.name === '变迁篇' ? bianqianLive.get(title) : null
                     const jiayuanHref = section.name === '家园篇' ? jiayuanLive.get(title) : null
-                    const href = slug ? `/luzexi/yuyan/${slug}` : cunzaiHref ?? bianqianHref ?? jiayuanHref ?? null
+                    const meixueHref = section.name === '美学篇' ? meixueLive.get(title) : null
+                    const href = slug ? `/luzexi/yuyan/${slug}` : cunzaiHref ?? bianqianHref ?? jiayuanHref ?? meixueHref ?? null
 
                     return (
                       <span key={idx} className="font-sans text-xs text-gray-500 dark:text-gray-400">

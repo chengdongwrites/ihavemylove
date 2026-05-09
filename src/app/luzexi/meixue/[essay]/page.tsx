@@ -50,6 +50,8 @@ export async function generateMetadata({ params }: { params: { essay: string } }
   }
 }
 
+// Matches ## primary heading (e.g. ## 序言) — left-aligned, larger
+const PRIMARY_HEADING_RE = /^## (.+)$/
 // Matches 【section title】 markers
 const SECTION_TITLE_RE = /^【(.+)】$/
 // 【图:filename:caption】 or 【图:filename:caption:sm】 — inline image with optional size
@@ -197,6 +199,17 @@ function renderContent(
         <p key={key++} className="font-serif font-bold text-ink dark:text-gray-300 mt-10 mb-2" style={{ textIndent: 0 }}>
           注
         </p>
+      )
+      continue
+    }
+
+    // ## Primary heading — left-aligned, larger, ink color
+    const primaryMatch = trimmed.match(PRIMARY_HEADING_RE)
+    if (primaryMatch) {
+      elements.push(
+        <h2 key={key++} className="font-serif font-semibold text-ink dark:text-gray-100 text-xl sm:text-2xl tracking-wide mt-12 mb-4" style={{ textIndent: 0 }}>
+          {primaryMatch[1]}
+        </h2>
       )
       continue
     }
