@@ -255,13 +255,13 @@ function renderContent(text: string) {
       continue
     }
 
-    // 『Quoted verse』 — centered italic, supports ／ line separator
+    // 『Quoted text』 — left-aligned italic block quote, supports ／ line separator
     const verseMatch = trimmed.match(VERSE_BLOCK_RE)
     if (verseMatch) {
       const verseLines = verseMatch[1].split('／')
       elements.push(
-        <div key={key++} className="text-center font-serif italic text-gray-600 dark:text-gray-400 tracking-wide my-6" style={{ textIndent: 0 }}>
-          {verseLines.map((l, idx) => <div key={idx}>{renderInline(l, idx)}</div>)}
+        <div key={key++} className="font-serif italic text-gray-600 dark:text-gray-300 my-6 pl-5 border-l-2 border-amber-300/60 dark:border-amber-700/50 leading-relaxed" style={{ textIndent: 0 }}>
+          {verseLines.map((l, idx) => <div key={idx} className="mb-2 last:mb-0">{renderInline(l, idx)}</div>)}
         </div>
       )
       i++
