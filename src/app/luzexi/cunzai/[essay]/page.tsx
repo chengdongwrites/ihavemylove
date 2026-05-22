@@ -76,7 +76,7 @@ function renderInline(text: string, keyBase = 0): React.ReactNode {
   )
 }
 
-function renderTable(caption: string, rows: string[][], key: number): React.ReactNode {
+function renderTable(caption: string, rows: string[][], key: number, cols?: number[]): React.ReactNode {
   const [header, ...body] = rows
   return (
     <div key={key} className="my-10" style={{ textIndent: 0 }}>
@@ -86,7 +86,12 @@ function renderTable(caption: string, rows: string[][], key: number): React.Reac
         </p>
       )}
       <div className="overflow-x-auto -mx-4 sm:mx-0">
-        <table className="w-full text-sm border-collapse min-w-[40rem] sm:min-w-0">
+        <table className="w-full text-sm border-collapse min-w-[40rem] sm:min-w-0" style={{ tableLayout: cols ? 'fixed' : 'auto' }}>
+          {cols && (
+            <colgroup>
+              {cols.map((w, i) => <col key={i} style={{ width: `${w}%` }} />)}
+            </colgroup>
+          )}
           <thead>
             <tr className="border-b-2 border-amber-200/60 dark:border-amber-700/40">
               {header?.map((cell, i) => (
@@ -144,10 +149,17 @@ function renderContent(text: string) {
       continue
     }
 
-    // 【表:caption】 ... 【/表】 — multi-line table block
+    // 【表:caption】 or 【表:caption|cols=W1,W2,W3】 ... 【/表】 — multi-line table block
     const tableOpen = trimmed.match(TABLE_OPEN_RE)
     if (tableOpen && tableOpen[0].startsWith('【表:')) {
-      const caption = tableOpen[1]
+      let captionRaw = tableOpen[1]
+      let cols: number[] | undefined
+      const colsMatch = captionRaw.match(/^(.*)\|cols=([\d,]+)$/)
+      if (colsMatch) {
+        captionRaw = colsMatch[1]
+        cols = colsMatch[2].split(',').map((s) => parseInt(s, 10))
+      }
+      const caption = captionRaw
       const rows: string[][] = []
       i++
       while (i < lines.length && lines[i].trim() !== TABLE_CLOSE) {
@@ -158,7 +170,7 @@ function renderContent(text: string) {
         i++
       }
       i++ // skip closing tag
-      elements.push(renderTable(caption, rows, key++))
+      elements.push(renderTable(caption, rows, key++, cols))
       inNote = false
       continue
     }
@@ -169,7 +181,7 @@ function renderContent(text: string) {
       const [, filename, caption] = imgMatch
       elements.push(
         <figure key={key++} className="my-10 text-center">
-          <div className="inline-block max-w-lg w-full mx-auto">
+          <div className="inline-block max-w-2xl w-full mx-auto">
             <Image
               src={`/images/${filename}`}
               alt={caption || ''}
@@ -359,16 +371,16 @@ export default function CunzaiEssayPage({ params }: { params: { essay: string } 
           <div className="w-12 h-px bg-accent/40 dark:bg-amber-600/40 mx-auto mt-6" />
         </div>
 
-        {/* Illustration — skipped when images are placed inline via 【图:...】 */}
-        {essay.image && !hasInlineImages && (
+        {/* Illustration — cover image at top */}
+        {essay.image && (
           <figure className="my-8 text-center">
-            <div className="inline-block max-w-sm w-full mx-auto">
+            <div className="inline-block max-w-2xl w-full mx-auto">
               <Image
                 src={`/images/${essay.image}`}
                 alt={essay.imageCaption ?? essay.title}
-                width={480}
-                height={360}
-                className="w-full h-auto rounded shadow-md object-cover"
+                width={900}
+                height={600}
+                className="w-full h-auto rounded shadow-md"
               />
             </div>
             {essay.imageCaption && (
