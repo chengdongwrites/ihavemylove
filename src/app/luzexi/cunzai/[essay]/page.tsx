@@ -178,18 +178,16 @@ function renderContent(text: string) {
     // 【图:filename:caption】 or 【图:filename:caption:WxH】 — inline image
     const imgMatch = trimmed.match(INLINE_IMG_RE)
     if (imgMatch) {
-      const [, filename, caption, w, h] = imgMatch
-      const imgW = w ? parseInt(w, 10) : 1000
-      const imgH = h ? parseInt(h, 10) : 400
+      const [, filename, caption] = imgMatch
       elements.push(
         <figure key={key++} className="my-10 text-center">
-          <div className="inline-block max-w-2xl w-full mx-auto">
-            <Image
+          <div className="max-w-2xl mx-auto">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
               src={`/images/${filename}`}
               alt={caption || ''}
-              width={imgW}
-              height={imgH}
-              className="w-full h-auto rounded shadow-md"
+              className="block w-full h-auto rounded shadow-md"
+              style={{ display: 'block' }}
             />
           </div>
           {caption && (
@@ -376,13 +374,13 @@ export default function CunzaiEssayPage({ params }: { params: { essay: string } 
         {/* Illustration — cover image at top */}
         {essay.image && (
           <figure className="my-8 text-center">
-            <div className="inline-block max-w-2xl w-full mx-auto">
-              <Image
+            <div className="max-w-2xl mx-auto">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={`/images/${essay.image}`}
                 alt={essay.imageCaption ?? essay.title}
-                width={essay.imageWidth ?? 1000}
-                height={essay.imageHeight ?? 400}
-                className="w-full h-auto rounded shadow-md"
+                className="block w-full h-auto rounded shadow-md"
+                style={{ display: 'block' }}
               />
             </div>
             {essay.imageCaption && (
