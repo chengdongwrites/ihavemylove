@@ -2507,6 +2507,8 @@ export const cunzaiEssays: Essay[] = [
     section: "存在篇",
     image: "cunzai-jmzys-01.png",
     imageCaption: "山水无言，自成天籁：明·沈周-文徵明合璧《山水图卷》局部（纽约大都会藏）",
+    imageWidth: 998,
+    imageHeight: 395,
     content: `## 一、引言
 
 在思想史的电闪雷鸣、浮光掠影中，真正能跨越数千年、遥遥相呼应的瞬间并不多见。
@@ -2695,7 +2697,7 @@ export const cunzaiEssays: Essay[] = [
 
 当一位少年凭直觉领悟到静默是音乐的纽带，我们便知道，庄子的"天籁"与海德格尔的"静默鸣响"，并非尘封的哲学概念，而是始终在等待被每一颗澄明之心重新发现的、关于存在的永恒诗篇。
 
-【图:cunzai-jmzys-02.png:山川静立，自有鸣响：明·沈周文徵明合璧《山水图卷》局部】
+【图:cunzai-jmzys-02.png:山川静立，自有鸣响：明·沈周文徵明合璧《山水图卷》局部:994x305】
 
 【参考文献】
 

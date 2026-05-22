@@ -52,7 +52,7 @@ const SUBHEADING_RE = /^「(.+)」$/
 // 『Quoted verse』 — centered italic; use ／ as line separator
 const VERSE_BLOCK_RE = /^『(.+)』$/
 // 【图:filename:caption】 — inline image
-const INLINE_IMG_RE = /^【图:([^:]+):(.*)】$/
+const INLINE_IMG_RE = /^【图:([^:]+):([^:】]*)(?::(\d+)x(\d+))?】$/
 // 【表:caption】 — opens a table block; closed by 【/表】
 const TABLE_OPEN_RE = /^【表:(.*)】$/
 const TABLE_CLOSE = '【/表】'
@@ -175,18 +175,20 @@ function renderContent(text: string) {
       continue
     }
 
-    // 【图:filename:caption】 — inline image
+    // 【图:filename:caption】 or 【图:filename:caption:WxH】 — inline image
     const imgMatch = trimmed.match(INLINE_IMG_RE)
     if (imgMatch) {
-      const [, filename, caption] = imgMatch
+      const [, filename, caption, w, h] = imgMatch
+      const imgW = w ? parseInt(w, 10) : 1000
+      const imgH = h ? parseInt(h, 10) : 400
       elements.push(
         <figure key={key++} className="my-10 text-center">
           <div className="inline-block max-w-2xl w-full mx-auto">
             <Image
               src={`/images/${filename}`}
               alt={caption || ''}
-              width={745}
-              height={428}
+              width={imgW}
+              height={imgH}
               className="w-full h-auto rounded shadow-md"
             />
           </div>
@@ -378,8 +380,8 @@ export default function CunzaiEssayPage({ params }: { params: { essay: string } 
               <Image
                 src={`/images/${essay.image}`}
                 alt={essay.imageCaption ?? essay.title}
-                width={900}
-                height={600}
+                width={essay.imageWidth ?? 1000}
+                height={essay.imageHeight ?? 400}
                 className="w-full h-auto rounded shadow-md"
               />
             </div>
