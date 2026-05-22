@@ -20,10 +20,11 @@ export async function generateMetadata({ params }: { params: { essay: string } }
     .map((l: string) => l.trim())
     .find((l: string) =>
       l.length > 20 &&
-      /[\u4e00-\u9fff]/.test(l) &&
+      /[一-鿿]/.test(l) &&
       !l.startsWith('《') &&
       !l.startsWith('【') &&
       !l.startsWith('（') &&
+      !l.startsWith('## ') &&
       !l.match(/^[一二三四五六七八九十]+[、．。\s]*$/)
     )
   const description = firstPara
@@ -42,40 +43,123 @@ export async function generateMetadata({ params }: { params: { essay: string } }
   }
 }
 
-// 【Section Title】 marker
+// ## primary heading (left-aligned, larger, ink color)
+const PRIMARY_HEADING_RE = /^## (.+)$/
+// 【Section Title】 — centered gold
 const SECTION_TITLE_RE = /^【(.+)】$/
-// 「Sub-heading」
+// 「Sub-heading」 — bold left-aligned
 const SUBHEADING_RE = /^「(.+)」$/
 // 『Quoted verse』 — centered italic; use ／ as line separator
 const VERSE_BLOCK_RE = /^『(.+)』$/
 // 【图:filename:caption】 — inline image
 const INLINE_IMG_RE = /^【图:([^:]+):(.*)】$/
+// 【表:caption】 — opens a table block; closed by 【/表】
+const TABLE_OPEN_RE = /^【表:(.*)】$/
+const TABLE_CLOSE = '【/表】'
+
+// Inline markup: ^1^ → <sup>1</sup>;  <br> → line break;  【链:url|text】 → <a>
+function renderInline(text: string, keyBase = 0): React.ReactNode {
+  // Split on tokens we care about, preserving them
+  const parts = text.split(/(【链:[^|】]+\|[^】]+】|\^\d+\^|<br\s*\/?>)/g)
+  if (parts.length === 1) return text
+  return (
+    <>
+      {parts.map((p, i) => {
+        if (/^<br\s*\/?>$/.test(p)) return <br key={`${keyBase}-${i}`} />
+        const sup = p.match(/^\^(\d+)\^$/)
+        if (sup) return <sup key={`${keyBase}-${i}`} className="text-[10px] font-sans text-gray-400 dark:text-gray-500 align-super">{sup[1]}</sup>
+        const link = p.match(/^【链:([^|】]+)\|([^】]+)】$/)
+        if (link) return <a key={`${keyBase}-${i}`} href={link[1]} target="_blank" rel="noopener noreferrer" className="nav-link underline underline-offset-2">{link[2]}</a>
+        return <span key={`${keyBase}-${i}`}>{p}</span>
+      })}
+    </>
+  )
+}
+
+function renderTable(caption: string, rows: string[][], key: number): React.ReactNode {
+  const [header, ...body] = rows
+  return (
+    <div key={key} className="my-10" style={{ textIndent: 0 }}>
+      {caption && (
+        <p className="text-center font-serif text-ink dark:text-gray-200 text-sm sm:text-base mb-3 tracking-wide">
+          {caption}
+        </p>
+      )}
+      <div className="overflow-x-auto -mx-4 sm:mx-0">
+        <table className="w-full text-sm border-collapse min-w-[40rem] sm:min-w-0">
+          <thead>
+            <tr className="border-b-2 border-amber-200/60 dark:border-amber-700/40">
+              {header?.map((cell, i) => (
+                <th key={i} className="px-3 py-2 text-left font-serif font-semibold text-ink dark:text-gray-200 align-top">
+                  {renderInline(cell, i)}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {body.map((row, ri) => (
+              <tr key={ri} className="border-b border-amber-100/60 dark:border-gray-800/60">
+                {row.map((cell, ci) => (
+                  <td key={ci} className="px-3 py-3 align-top text-gray-700 dark:text-gray-300 leading-relaxed">
+                    {renderInline(cell, ri * 10 + ci)}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
 
 function renderContent(text: string) {
   const lines = text.split('\n')
   const elements: React.ReactNode[] = []
   let key = 0
   let inNote = false
+  let i = 0
 
-  for (const line of lines) {
-    const trimmed = line.trim()
+  while (i < lines.length) {
+    const trimmed = lines[i].trim()
 
     if (!trimmed) {
       elements.push(<div key={key++} className="h-2" />)
+      i++
       continue
     }
 
     if (trimmed === '---' || trimmed === '***') {
       inNote = false
       elements.push(<div key={key++} className="ornament my-8">· · ·</div>)
+      i++
       continue
     }
 
-    // ★ — poem stanza divider
     if (trimmed === '★') {
       elements.push(
         <div key={key++} className="text-center text-gray-300 dark:text-gray-600 my-4 text-sm tracking-widest">★</div>
       )
+      i++
+      continue
+    }
+
+    // 【表:caption】 ... 【/表】 — multi-line table block
+    const tableOpen = trimmed.match(TABLE_OPEN_RE)
+    if (tableOpen && tableOpen[0].startsWith('【表:')) {
+      const caption = tableOpen[1]
+      const rows: string[][] = []
+      i++
+      while (i < lines.length && lines[i].trim() !== TABLE_CLOSE) {
+        const rowLine = lines[i].trim()
+        if (rowLine) {
+          rows.push(rowLine.split('|').map((c) => c.trim()))
+        }
+        i++
+      }
+      i++ // skip closing tag
+      elements.push(renderTable(caption, rows, key++))
+      inNote = false
       continue
     }
 
@@ -101,22 +185,49 @@ function renderContent(text: string) {
           )}
         </figure>
       )
+      i++
       continue
     }
 
     // 【注】or 【注释】 — left-aligned note/reference header
-    if (trimmed === '【注】' || trimmed === '【注释】') {
+    if (trimmed === '【注】' || trimmed === '【注释】' || trimmed === '【参考文献】') {
       inNote = true
-      const label = trimmed === '【注释】' ? '注释' : '注'
+      const label = trimmed === '【注释】' ? '注释' : trimmed === '【参考文献】' ? '参考文献' : '注'
       elements.push(
         <p key={key++} className="font-serif font-bold text-ink dark:text-gray-300 mt-10 mb-3" style={{ textIndent: 0 }}>
           {label}
         </p>
       )
+      i++
       continue
     }
 
-    // 【Section Title】
+    // 【后记】 — afterword header
+    if (trimmed === '【后记】') {
+      inNote = false
+      elements.push(
+        <p key={key++} className="font-serif font-bold text-ink dark:text-gray-300 mt-10 mb-3" style={{ textIndent: 0 }}>
+          后记
+        </p>
+      )
+      i++
+      continue
+    }
+
+    // ## Primary heading — left-aligned, larger, ink color
+    const primaryMatch = trimmed.match(PRIMARY_HEADING_RE)
+    if (primaryMatch) {
+      inNote = false
+      elements.push(
+        <h2 key={key++} className="font-serif font-semibold text-ink dark:text-gray-100 text-xl sm:text-2xl tracking-wide mt-12 mb-4" style={{ textIndent: 0 }}>
+          {primaryMatch[1]}
+        </h2>
+      )
+      i++
+      continue
+    }
+
+    // 【Section Title】 — centered gold
     const secMatch = trimmed.match(SECTION_TITLE_RE)
     if (secMatch) {
       inNote = false
@@ -128,6 +239,7 @@ function renderContent(text: string) {
           <div className="w-10 h-px bg-accent/50 dark:bg-amber-600/50 mx-auto" />
         </div>
       )
+      i++
       continue
     }
 
@@ -137,9 +249,10 @@ function renderContent(text: string) {
       const verseLines = verseMatch[1].split('／')
       elements.push(
         <div key={key++} className="text-center font-serif italic text-gray-600 dark:text-gray-400 tracking-wide my-6" style={{ textIndent: 0 }}>
-          {verseLines.map((l, i) => <div key={i}>{l}</div>)}
+          {verseLines.map((l, idx) => <div key={idx}>{renderInline(l, idx)}</div>)}
         </div>
       )
+      i++
       continue
     }
 
@@ -148,18 +261,21 @@ function renderContent(text: string) {
     if (subMatch) {
       elements.push(
         <p key={key++} className="font-serif font-bold text-ink dark:text-gray-200 tracking-wide mt-8 mb-3 text-base" style={{ textIndent: 0 }}>
-          {subMatch[1]}
+          {renderInline(subMatch[1])}
         </p>
       )
+      i++
       continue
     }
 
+    // (date / postscript) right-aligned
     if ((trimmed.startsWith('（') || trimmed.startsWith('(')) && (trimmed.endsWith('）') || trimmed.endsWith(')'))) {
       elements.push(
         <p key={key++} className="text-right font-sans text-xs text-gray-400 dark:text-gray-500 mt-8 mb-2" style={{ textIndent: 0 }}>
           {trimmed}
         </p>
       )
+      i++
       continue
     }
 
@@ -167,17 +283,19 @@ function renderContent(text: string) {
     if (inNote) {
       elements.push(
         <p key={key++} className="text-sm text-gray-500 dark:text-gray-400 mb-3 leading-relaxed" style={{ textIndent: 0 }}>
-          {trimmed}
+          {renderInline(trimmed)}
         </p>
       )
+      i++
       continue
     }
 
     elements.push(
       <p key={key++} className="mb-5" style={{ textIndent: '2em' }}>
-        {trimmed}
+        {renderInline(trimmed)}
       </p>
     )
+    i++
   }
 
   return elements
