@@ -60,7 +60,7 @@ const TABLE_CLOSE = '【/表】'
 // Inline markup: ^1^ → <sup>1</sup>;  <br> → line break;  【链:url|text】 → <a>
 function renderInline(text: string, keyBase = 0): React.ReactNode {
   // Split on tokens we care about, preserving them
-  const parts = text.split(/(【链:[^|】]+\|[^】]+】|\^\d+\^|<br\s*\/?>)/g)
+  const parts = text.split(/(【链:[^|】]+\|[^】]+】|\^\d+\^|<br\s*\/?>|\*[^*\n]+\*)/g)
   if (parts.length === 1) return text
   return (
     <>
@@ -70,6 +70,8 @@ function renderInline(text: string, keyBase = 0): React.ReactNode {
         if (sup) return <sup key={`${keyBase}-${i}`} className="text-[10px] font-sans text-gray-400 dark:text-gray-500 align-super">{sup[1]}</sup>
         const link = p.match(/^【链:([^|】]+)\|([^】]+)】$/)
         if (link) return <a key={`${keyBase}-${i}`} href={link[1]} target="_blank" rel="noopener noreferrer" className="nav-link underline underline-offset-2">{link[2]}</a>
+        const italic = p.match(/^\*([^*\n]+)\*$/)
+        if (italic) return <em key={`${keyBase}-${i}`} className="italic font-normal">{italic[1]}</em>
         return <span key={`${keyBase}-${i}`}>{p}</span>
       })}
     </>
