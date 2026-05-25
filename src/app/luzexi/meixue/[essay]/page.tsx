@@ -65,7 +65,7 @@ const VERSE_BLOCK_RE = /^『(.+)』$/
 
 // Render inline markup: ^1^ → <sup>1</sup>  and  【链:url|text】 → <a>
 function renderWithSup(text: string): React.ReactNode {
-  const parts = text.split(/(【链:[^|】]+\|[^】]+】|\^\d+\^)/)
+  const parts = text.split(/(【链:[^|】]+\|[^】]+】|\^\d+\^|\*[^*\n]+\*)/)
   if (parts.length === 1) return text
   return (
     <>
@@ -74,6 +74,8 @@ function renderWithSup(text: string): React.ReactNode {
         if (sup) return <sup key={i} className="text-[10px] font-sans text-gray-400 dark:text-gray-500 align-super">{sup[1]}</sup>
         const link = p.match(/^【链:([^|】]+)\|([^】]+)】$/)
         if (link) return <a key={i} href={link[1]} target="_blank" rel="noopener noreferrer" className="nav-link underline underline-offset-2">{link[2]}</a>
+        const italic = p.match(/^\*([^*\n]+)\*$/)
+        if (italic) return <em key={i} className="italic font-normal">{italic[1]}</em>
         return <span key={i}>{p}</span>
       })}
     </>
@@ -225,21 +227,18 @@ function renderContent(
       continue
     }
 
-    // 『quoted verse』 — centered block, left-aligned text inside, italic
-    // ／　／ (with ideographic space) renders as a blank spacer between stanzas
+    // 『Quoted text』 — left-aligned italic blockquote, supports ／ line separator
     const verseMatch = trimmed.match(VERSE_BLOCK_RE)
     if (verseMatch) {
       const verseLines = verseMatch[1].split('／')
       elements.push(
-        <div key={key++} className="flex justify-center my-6" style={{ textIndent: 0 }}>
-          <div className="font-serif italic text-gray-600 dark:text-gray-400 tracking-wide text-left">
-            {verseLines.map((l, i) => {
-              const line = l.trim()
-              return line
-                ? <div key={i}>{renderWithSup(line)}</div>
-                : <div key={i} className="h-4" />
-            })}
-          </div>
+        <div key={key++} className="font-serif italic text-gray-600 dark:text-gray-300 my-6 pl-5 border-l-2 border-amber-300/60 dark:border-amber-700/50 leading-relaxed" style={{ textIndent: 0 }}>
+          {verseLines.map((l, i) => {
+            const line = l.trim()
+            return line
+              ? <div key={i} className="mb-2 last:mb-0">{renderWithSup(line)}</div>
+              : <div key={i} className="h-4" />
+          })}
         </div>
       )
       continue
