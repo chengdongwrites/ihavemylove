@@ -256,7 +256,7 @@ function renderContent(
           <div key={key++} className="my-8 px-8 sm:px-16" style={{ textIndent: 0 }}>
             <p className="font-serif text-ink dark:text-gray-200 tracking-wide leading-loose text-center">
               {poemLines.map((l, i) => (
-                <span key={i}>{l}{i < poemLines.length - 1 && <br />}</span>
+                <span key={i}>{renderWithSup(l)}{i < poemLines.length - 1 && <br />}</span>
               ))}
             </p>
           </div>
