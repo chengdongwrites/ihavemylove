@@ -65,7 +65,7 @@ const VERSE_BLOCK_RE = /^『(.+)』$/
 
 // Render inline markup: ^1^ → <sup>1</sup>  and  【链:url|text】 → <a>
 function renderWithSup(text: string): React.ReactNode {
-  const parts = text.split(/(【链:[^|】]+\|[^】]+】|\^\d+\^|\*[^*\n]+\*)/)
+  const parts = text.split(/(【链:[^|】]+\|[^】]+】|\^\d+\^|\*\*[^*\n]+\*\*|\*[^*\n]+\*)/)
   if (parts.length === 1) return text
   return (
     <>
@@ -74,6 +74,8 @@ function renderWithSup(text: string): React.ReactNode {
         if (sup) return <sup key={i} className="text-[10px] font-sans text-gray-400 dark:text-gray-500 align-super">{sup[1]}</sup>
         const link = p.match(/^【链:([^|】]+)\|([^】]+)】$/)
         if (link) return <a key={i} href={link[1]} target="_blank" rel="noopener noreferrer" className="nav-link underline underline-offset-2">{link[2]}</a>
+        const bold = p.match(/^\*\*([^*\n]+)\*\*$/)
+        if (bold) return <strong key={i} className="font-semibold">{bold[1]}</strong>
         const italic = p.match(/^\*([^*\n]+)\*$/)
         if (italic) return <em key={i} className="italic font-normal">{italic[1]}</em>
         return <span key={i}>{p}</span>
