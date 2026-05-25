@@ -4041,7 +4041,7 @@ export const meixueEssays: Essay[] = [
     section: "美学篇",
     image: "meixue-huamu-01.jpg",
     imageCaption: "莲花玉兰",
-    content: `【图:meixue-huamu-01.jpg:莲花玉兰】
+    content: `
 
 清晨推窗，院中莲花玉兰又开。世人称其广玉兰，或大花玉兰，这个夏天，我喜欢唤它作"莲花玉兰"——花瓣舒展如莲台，木质坚韧似禅杖，这名号里便藏着一本禅经。
 
