@@ -61,8 +61,8 @@ const CI_STANZA_RE = /^「(.+)」$/
 const VERSE_RE = /^『(.+)』$/
 // 【Section Title】
 const SECTION_TITLE_RE = /^【(.+)】$/
-// 【图:filename:caption】
-const INLINE_IMG_RE = /^【图:([^:]+):(.*)】$/
+// 【图:filename:caption】 or 【图:filename:caption:full】
+const INLINE_IMG_RE = /^【图:([^:]+):([^:]*)(?::([^】]*))?】$/
 // 【发表|url|text】 — right-aligned linked publication note
 const PUBLISH_RE = /^【发表\|([^|]+)\|(.+)】$/
 
@@ -106,13 +106,14 @@ function renderContent(text: string) {
       continue
     }
 
-    // 【图:filename:caption】 — inline image
+    // 【图:filename:caption】 or 【图:filename:caption:full】 — inline image
     const imgMatch = trimmed.match(INLINE_IMG_RE)
     if (imgMatch) {
-      const [, filename, caption] = imgMatch
+      const [, filename, caption, size] = imgMatch
+      const isFull = size === 'full'
       elements.push(
         <figure key={key++} className="my-10 text-center">
-          <div className="inline-block max-w-lg w-full mx-auto">
+          <div className={isFull ? 'w-full mx-auto' : 'inline-block max-w-md w-full mx-auto'}>
             <Image
               src={`/images/${filename}`}
               alt={caption || ''}
