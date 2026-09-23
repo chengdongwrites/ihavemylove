@@ -185,11 +185,11 @@ function renderContent(
       continue
     }
 
-    // 【引】 — block quote: italic, left-aligned, no text-indent
+    // 【引】 — block quote: italic, centered, small
     if (trimmed.startsWith('【引】')) {
       const quoteText = trimmed.slice(3)
       elements.push(
-        <p key={key++} className="italic leading-loose text-gray-700 dark:text-gray-300 my-5 pl-5 border-l-2 border-amber-300/60 dark:border-amber-700/50" style={{ textIndent: 0 }}>
+        <p key={key++} className="italic leading-loose text-xs text-gray-500 dark:text-gray-400 my-5 text-center" style={{ textIndent: 0 }}>
           {renderWithSup(quoteText)}
         </p>
       )
@@ -222,7 +222,7 @@ function renderContent(
     const sectionMatch = trimmed.match(SECTION_TITLE_RE)
     if (sectionMatch) {
       elements.push(
-        <p key={key++} className="text-center font-serif text-accent dark:text-amber-400 tracking-widest my-6 text-base" style={{ textIndent: 0 }}>
+        <p key={key++} className="text-center font-serif font-bold text-accent dark:text-amber-400 tracking-widest my-6 text-xl" style={{ textIndent: 0 }}>
           {sectionMatch[1]}
         </p>
       )
