@@ -218,6 +218,22 @@ function renderContent(
       continue
     }
 
+    // 【下阕:lines with ／】 — left-aligned ci stanza with extra top space (must be before SECTION_TITLE_RE)
+    if (trimmed.startsWith('【下阕:') && trimmed.endsWith('】')) {
+      const inner = trimmed.slice(4, -1)
+      const stanzaLines = inner.split('／')
+      elements.push(
+        <div key={key++} className="mt-6 mb-8 px-8 sm:px-16" style={{ textIndent: 0 }}>
+          <p className="font-serif text-ink dark:text-gray-200 tracking-wide leading-loose">
+            {stanzaLines.map((l, i) => (
+              <span key={i}>{renderWithSup(l.trim())}{i < stanzaLines.length - 1 && <br />}</span>
+            ))}
+          </p>
+        </div>
+      )
+      continue
+    }
+
     // 【Section Title】 marker
     const sectionMatch = trimmed.match(SECTION_TITLE_RE)
     if (sectionMatch) {
@@ -241,22 +257,6 @@ function renderContent(
               ? <div key={i} className="mb-2 last:mb-0">{renderWithSup(line)}</div>
               : <div key={i} className="h-4" />
           })}
-        </div>
-      )
-      continue
-    }
-
-    // 【下阕:lines with ／】 — left-aligned ci stanza with extra top space
-    if (trimmed.startsWith('【下阕:') && trimmed.endsWith('】')) {
-      const inner = trimmed.slice(4, -1)
-      const stanzaLines = inner.split('／')
-      elements.push(
-        <div key={key++} className="mt-6 mb-8 px-8 sm:px-16" style={{ textIndent: 0 }}>
-          <p className="font-serif text-ink dark:text-gray-200 tracking-wide leading-loose">
-            {stanzaLines.map((l, i) => (
-              <span key={i}>{renderWithSup(l.trim())}{i < stanzaLines.length - 1 && <br />}</span>
-            ))}
-          </p>
         </div>
       )
       continue
