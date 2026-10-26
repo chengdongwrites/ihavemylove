@@ -4329,9 +4329,7 @@ export const meixueEssays: Essay[] = [
     section: "美学篇",
     image: "meixue-tinyu-01.png",
     imageCaption: '"Three realms"——ChatGPT制图',
-    content: `【图:meixue-tinyu-01.png:"Three realms"——ChatGPT制图】
-
-四季的雨，落在地上，成为"地籁"的一部分。人听起来，情境各异：可能茫然，可能苏醒；可能焦急，可能舒畅。听者若无心，则雨声便是噪音；若有意，雨声便成音乐。
+    content: `四季的雨，落在地上，成为"地籁"的一部分。人听起来，情境各异：可能茫然，可能苏醒；可能焦急，可能舒畅。听者若无心，则雨声便是噪音；若有意，雨声便成音乐。
 
 而雨是从天上落下来的，专注听雨的人，或许能听到天上的声音——天籁。能听到天籁的人，是有心之人，禅悟之人。
 
