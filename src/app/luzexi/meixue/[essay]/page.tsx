@@ -246,6 +246,22 @@ function renderContent(
       continue
     }
 
+    // 【下阕:lines with ／】 — left-aligned ci stanza with extra top space
+    if (trimmed.startsWith('【下阕:') && trimmed.endsWith('】')) {
+      const inner = trimmed.slice(4, -1)
+      const stanzaLines = inner.split('／')
+      elements.push(
+        <div key={key++} className="mt-6 mb-8 px-8 sm:px-16" style={{ textIndent: 0 }}>
+          <p className="font-serif text-ink dark:text-gray-200 tracking-wide leading-loose">
+            {stanzaLines.map((l, i) => (
+              <span key={i}>{renderWithSup(l.trim())}{i < stanzaLines.length - 1 && <br />}</span>
+            ))}
+          </p>
+        </div>
+      )
+      continue
+    }
+
     // 「poem block」 — narrow centered prose block if ／ present; else no-indent single line
     const poemMatch = trimmed.match(POEM_LINE_RE)
     if (poemMatch) {
@@ -385,7 +401,7 @@ export default function MeixueEssayPage({ params }: { params: { essay: string } 
         {/* Illustration — only at top if not using inline 【图】 placement */}
         {essay.image && !hasInlineImage && (
           <figure className="my-8 text-center">
-            <div className="inline-block max-w-sm w-full mx-auto">
+            <div className="inline-block max-w-lg w-full mx-auto">
               <Image
                 src={`/images/${essay.image}`}
                 alt={essay.imageCaption ?? essay.title}
