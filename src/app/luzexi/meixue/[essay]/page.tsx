@@ -270,12 +270,12 @@ function renderContent(
       const hasMultipleLines = content.includes('／') || stanzas.length > 1
       if (hasMultipleLines) {
         elements.push(
-          <div key={key++} className="my-6 flex flex-col items-center" style={{ textIndent: 0 }}>
-            <div>
+          <div key={key++} className="my-6 text-center" style={{ textIndent: 0 }}>
+            <div className="inline-block text-left">
               {stanzas.map((stanza, si) => {
                 const lines = stanza.trim().split('／')
                 return (
-                  <p key={si} className={`font-serif text-ink dark:text-gray-200 tracking-wide leading-8${si > 0 ? ' mt-4' : ''}`}>
+                  <p key={si} className={`font-serif text-ink dark:text-gray-200 tracking-wide leading-8${si > 0 ? ' mt-4' : ''}`} style={{ textIndent: 0 }}>
                     {lines.map((l, i) => (
                       <span key={i}>{renderWithSup(l.trim())}{i < lines.length - 1 && <br />}</span>
                     ))}
